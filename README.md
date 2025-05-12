@@ -58,30 +58,29 @@ When I’m not coding, you’ll probably find me tuned into a football match or 
 <br clear="both">
 
 ###
+###
 <h2 align="left">GitHub Stats</h2>
 ###
 
 <div align="center">
   <!-- First row: Stats and Languages side by side -->
-  <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-    <img src="https://github-readme-stats.vercel.app/api?username=AbinVarghese1&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=aura&locale=en&hide_border=true&order=1" height="150" alt="stats graph" />
-    <img src="https://github-readme-stats.vercel.app/api/top-langs?username=AbinVarghese1&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=6&theme=aura&hide_border=true&order=2" height="150" alt="languages graph" />
-  </div>
+  <img src="https://github-readme-stats.vercel.app/api?username=AbinVarghese1&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=aura&locale=en&hide_border=true&order=1" height="150" alt="stats graph" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=AbinVarghese1&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=6&theme=aura&hide_border=true&order=2" height="150" alt="languages graph" />
+  
+  <br>
   
   <!-- Second row: Streak graph -->
-  <div style="margin-top: 10px;">
-    <img src="https://streak-stats.demolab.com?user=AbinVarghese1&locale=en&mode=daily&theme=aura&hide_border=true&border_radius=7&order=3" height="178" alt="streak graph" />
-  </div>
+  <img src="https://streak-stats.demolab.com?user=AbinVarghese1&locale=en&mode=daily&theme=aura&hide_border=true&border_radius=7&order=3" height="178" alt="streak graph" />
+  
+  <br>
   
   <!-- Third row: Trophy graph -->
-  <div style="margin-top: 10px;">
-    <img src="https://github-profile-trophy.vercel.app?username=AbinVarghese1&theme=radical&column=4&row=2&margin-w=8&margin-h=8&no-bg=false&no-frame=true&order=4" height="150" alt="trophy graph" />
-  </div>
+  <img src="https://github-profile-trophy.vercel.app?username=AbinVarghese1&theme=radical&column=4&row=2&margin-w=8&margin-h=8&no-bg=false&no-frame=true&order=4" height="150" alt="trophy graph" />
 </div>
 ###
 
 <br>
-
+<br>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/output/pacman-contribution-graph-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/output/pacman-contribution-graph.svg">
