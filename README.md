@@ -3,8 +3,8 @@
 ###
 
 <p align="left">My name is Abin Varghese, a computer engineer from Kerala, India, with a strong passion for technology and a lifelong love for football. ⚽💻<br><br>
-I focus on <strong>web development</strong>, <strong>AI</strong>, and <strong>IoT</strong>, and have worked on several application-based projects—from smart assistants and accessibility tools to intelligent weather solutions—always aiming to build something useful and impactful.<br><br>
-When I’m not coding, you’ll probably find me tuned into a football match or analyzing plays like a coach-in-the-making, all while sketching out ideas for my next tech project.🏆<br><br>
+I focus on <strong>web development</strong>, <strong>AI</strong>, and <strong>IoT</strong>, and have worked on several application based projects from smart assistants and accessibility tools to intelligent weather solutions—always aiming to build something useful and impactful.<br><br>
+When I’m not coding, you’ll probably find me tuned into a football match or analyzing plays like a coach in the making, all while sketching out ideas for my next tech project.🏆<br><br>
 </p>
 
 ###
