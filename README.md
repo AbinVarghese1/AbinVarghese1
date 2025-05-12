@@ -58,9 +58,8 @@ When I’m not coding, you’ll probably find me tuned into a football match or 
 <br clear="both">
 
 ###
-###
+
 <h2 align="left">GitHub Stats</h2>
-###
 
 <div align="center">
   <!-- First row: Stats and Languages side by side -->
@@ -77,10 +76,10 @@ When I’m not coding, you’ll probably find me tuned into a football match or 
   <!-- Third row: Trophy graph -->
   <img src="https://github-profile-trophy.vercel.app?username=AbinVarghese1&theme=radical&column=4&row=2&margin-w=8&margin-h=8&no-bg=false&no-frame=true&order=4" height="150" alt="trophy graph" />
 </div>
-###
 
 <br>
 <br>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/output/pacman-contribution-graph-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/output/pacman-contribution-graph.svg">
