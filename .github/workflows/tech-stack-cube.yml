@@ -1,39 +1,50 @@
 name: Generate Tech Stack Cube
 
 on:
-  # Run weekly on Sunday
+  # Run manually from the Actions tab
+  workflow_dispatch:
+  
+  # Run on schedule (once a day)
   schedule:
-    - cron: '0 0 * * 0'
-  # Run on push to main branch
+    - cron: '0 0 * * *'
+    
+  # Run on pushes to main branch
   push:
     branches: [ main ]
-  # Allow manual trigger
-  workflow_dispatch:
 
 jobs:
-  generate-tech-stack-svg:
+  generate-tech-stack:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write
+    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    
-    - name: Install dependencies
-      run: |
-        npm install puppeteer @svgdotjs/svg.js
-
-    - name: Generate Tech Stack Cube SVG
-      run: node .github/scripts/generate-tech-stack-cube.js
-    
-    - name: Commit and Push changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add tech-stack-cube.svg
-        git commit -m "Update tech stack cube SVG" || echo "No changes to commit"
-        git push
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Install dependencies
+        run: |
+          npm install puppeteer
+          npm install @svgdotjs/svg.js
+      
+      - name: Generate Tech Stack Cube SVG
+        run: node .github/scripts/generate-tech-stack-cube.js
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      
+      - name: Commit and Push SVG
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'tech-stack-cube.svg'
+          message: 'Update tech stack cube SVG'
+          default_author: github_actions
+          github_token: ${{ secrets.GITHUB_TOKEN }}
