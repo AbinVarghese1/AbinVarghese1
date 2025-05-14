@@ -192,7 +192,7 @@ async function generateSVG() {
   await page.waitForFunction('window.SVGReady === true', { timeout: 10000 });
   
   // Add a small delay to ensure everything is rendered
-  // Using setTimeout instead of waitForTimeout for compatibility
+  // Using setTimeout with a promise since page.waitForTimeout isn't available in older Puppeteer
   await new Promise(resolve => setTimeout(resolve, 500));
   
   // Capture the SVG content from the page
