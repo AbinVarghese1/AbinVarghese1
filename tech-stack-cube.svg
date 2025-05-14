@@ -1,106 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
-  <defs>
-    <!-- Define gradients for cube faces -->
-    <linearGradient id="frontGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2d2d3d" />
-      <stop offset="100%" stop-color="#1a1a2e" />
-    </linearGradient>
-    <linearGradient id="rightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#252535" />
-      <stop offset="100%" stop-color="#111122" />
-    </linearGradient>
-    <linearGradient id="topGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#353545" />
-      <stop offset="100%" stop-color="#1f1f2f" />
-    </linearGradient>
-  </defs>
-  
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
   <style>
-    @keyframes rotateCube {
-      0% { transform: rotateX(15deg) rotateY(0deg); }
-      50% { transform: rotateX(15deg) rotateY(180deg); }
-      100% { transform: rotateX(15deg) rotateY(360deg); }
+    @keyframes rotate {
+      0% { transform: rotateX(-30deg) rotateY(45deg); }
+      50% { transform: rotateX(-30deg) rotateY(225deg); }
+      100% { transform: rotateX(-30deg) rotateY(405deg); }
     }
-    
     .cube {
-      animation: rotateCube 20s infinite linear;
-      transform-origin: 400px 200px;
+      transform-style: preserve-3d;
+      transform-origin: 100px 100px 0;
+      animation: rotate 20s infinite linear;
     }
-    
     .face {
       stroke: #8844ee;
       stroke-width: 2;
     }
-    
-    .title {
-      font-family: Arial, sans-serif;
-      font-size: 32px;
-      font-weight: bold;
-      fill: #8844ee;
-      text-anchor: middle;
-    }
   </style>
   
-  <!-- Background -->
-  <rect width="800" height="400" fill="#0d1117" />
-  
-  <!-- Title -->
-  <text x="400" y="50" class="title">Tech Stack</text>
-  
-  <!-- Container for 3D transformation -->
-  <g class="cube" transform-origin="400 200">
-
-    <!-- Front face -->
-    <g>
-      <polygon points="300,150 500,150 500,250 300,250" fill="url(#frontGradient)" class="face" />
-      <!-- Front face icons -->
-      <image x="320" y="170" width="60" height="60" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" />
-      <image x="420" y="170" width="60" height="60" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" />
-    </g>
-  
-    <!-- Right face -->
-    <g>
-      <polygon points="500,150 550,175 550,275 500,250" fill="url(#rightGradient)" class="face" />
-      <!-- Right face icons -->
-      <image x="505" y="170" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
-      <image x="505" y="220" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" />
-    </g>
-  
-    <!-- Top face -->
-    <g>
-      <polygon points="300,150 500,150 550,175 350,175" fill="url(#topGradient)" class="face" />
-      <!-- Top face icons -->
-      <image x="350" y="145" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" />
-      <image x="450" y="145" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" />
-    </g>
-  
-    <!-- Left face (slightly visible during rotation) -->
-    <g opacity="0">
-      <polygon points="300,150 250,175 250,275 300,250" fill="url(#rightGradient)" class="face" />
-      <!-- Left face icons will be visible during animation -->
-      <image x="265" y="170" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" />
-      <image x="265" y="220" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" />
-    </g>
-  
-    <!-- Bottom face (slightly visible during rotation) -->
-    <g opacity="0">
-      <polygon points="300,250 500,250 550,275 350,275" fill="url(#topGradient)" class="face" />
-      <!-- Bottom face icons will be visible during animation -->
-      <image x="350" y="245" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
-      <image x="450" y="245" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" />
-    </g>
-    
-    <!-- Back face (slightly visible during rotation) -->
-    <g opacity="0">
-      <polygon points="250,175 450,175 450,275 250,275" fill="url(#frontGradient)" class="face" />
-      <!-- Back face icons will be visible during animation -->
-      <image x="300" y="195" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" />
-      <image x="370" y="195" width="40" height="40" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" />
+  <!-- Center the drawing -->
+  <g transform="translate(100, 100)">
+    <!-- The cube with animation -->
+    <g class="cube">
+      <!-- Front face -->
+      <g transform="translate(0, 0)" class="face">
+        <polygon points="0,0 200,0 200,200 0,200" fill="#2a2a40" />
+        <image x="25" y="25" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" />
+        <image x="105" y="25" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" />
+        <image x="25" y="105" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
+        <image x="105" y="105" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" />
+      </g>
+      
+      <!-- Right face -->
+      <g transform="translate(200, 0) skewY(45) scale(0.707, 1)" class="face">
+        <polygon points="0,0 200,0 200,200 0,200" fill="#252538" />
+        <image x="25" y="25" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" />
+        <image x="105" y="25" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" />
+        <image x="25" y="105" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" />
+        <image x="105" y="105" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" />
+      </g>
+      
+      <!-- Top face -->
+      <g transform="translate(0, 0) skewX(45) scale(1, 0.707)" class="face">
+        <polygon points="0,0 200,0 200,200 0,200" fill="#1f1f30" />
+        <image x="25" y="25" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
+        <image x="105" y="25" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" />
+        <image x="25" y="105" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" />
+        <image x="105" y="105" width="70" height="70" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" />
+      </g>
     </g>
   </g>
-  
-  <!-- Tech stack labels -->
-  <g transform="translate(110, 330)">
-    <text fill="#8844ee" font-family="Arial, sans-serif" font-size="16">Tech Stack: Android, C, Figma, Firebase, Flutter, GCP, Java, Pandas, Python, Dart, Android Studio, Arduino</text>
-  </g>
-  </svg>
+</svg>
