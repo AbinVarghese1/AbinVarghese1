@@ -1,9 +1,8 @@
-// Script to generate a tech stack cube SVG
-const fs = require('fs');
-const { SVG } = require('@svgdotjs/svg.js');
 const puppeteer = require('puppeteer');
+const fs = require('fs');
+const path = require('path');
 
-// Tech stack icons - add your icons here
+// Tech stack icons
 const techIcons = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
@@ -19,188 +18,175 @@ const techIcons = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
 ];
 
-async function generateCubeHTML() {
-  // Create HTML content for the cube rendering
-  const htmlContent = `
+// SVG creation HTML content
+const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tech Stack Cube</title>
+  <meta charset="utf-8">
+  <title>Tech Stack Cube SVG Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0.16/dist/svg.min.js"></script>
   <style>
-    body { margin: 0; background-color: transparent; }
-    #cube-container { width: 600px; height: 400px; }
+    body { margin: 0; padding: 0; background: transparent; }
+    #container { width: 800px; height: 400px; }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-  <div id="cube-container"></div>
+  <div id="container"></div>
   <script>
-    // Set up scene
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
-    
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true,
-      preserveDrawingBuffer: true 
-    });
-    renderer.setSize(600, 400);
-    renderer.setClearColor(0x000000, 0);
-    document.getElementById('cube-container').appendChild(renderer.domElement);
-    
-    // Create cube
-    const cubeSize = 3;
-    const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-    
-    // Tech stack icons URLs
-    const techIcons = ${JSON.stringify(techIcons)};
-    
-    // Function to create a face texture with 3x3 grid of icons
-    function createFaceTexture(startIndex) {
-      const canvas = document.createElement('canvas');
-      canvas.width = 512;
-      canvas.height = 512;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#2d2d2d';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Function to create the SVG
+    async function createTechStackCube() {
+      // Create SVG.js instance
+      const draw = SVG().addTo('#container').size(800, 400);
       
-      // Create a 3x3 grid
-      return new Promise((resolve) => {
-        let loadedCount = 0;
-        const requiredLoads = Math.min(9, techIcons.length - startIndex);
-        
-        for (let i = 0; i < 3; i++) {
-          for (let j = 0; j < 3; j++) {
-            const iconIndex = startIndex + i * 3 + j;
-            if (iconIndex < techIcons.length) {
-              const img = new Image();
-              img.crossOrigin = "Anonymous";
-              img.onload = function() {
-                // Draw icon in position
-                const padding = 30;
-                const size = (512 - padding * 2) / 3;
-                ctx.drawImage(img, j * size + padding, i * size + padding, size - padding, size - padding);
-                
-                loadedCount++;
-                if (loadedCount >= requiredLoads) {
-                  const texture = new THREE.CanvasTexture(canvas);
-                  resolve(texture);
-                }
-              };
-              img.src = techIcons[iconIndex];
-            }
-          }
-        }
-        
-        // If no icons to load, resolve immediately
-        if (requiredLoads === 0) {
-          const texture = new THREE.CanvasTexture(canvas);
-          resolve(texture);
-        }
-      });
-    }
-    
-    // Create materials for each face
-    async function createCube() {
-      const materials = [];
+      // Define tech icons
+      const techIcons = ${JSON.stringify(techIcons)};
       
-      // Create 6 faces with tech icons
-      for (let i = 0; i < 6; i++) {
-        const texture = await createFaceTexture(i * 9);
-        materials.push(new THREE.MeshBasicMaterial({ map: texture }));
+      // Create cube faces
+      const centerX = 400;
+      const centerY = 200;
+      const size = 180;
+      
+      // Create an isometric cube
+      const top = draw.polygon([
+        centerX, centerY - size,
+        centerX + size, centerY - size/2,
+        centerX, centerY,
+        centerX - size, centerY - size/2
+      ]).fill('#3a3a3a').stroke({ color: '#8844ee', width: 2 });
+      
+      const right = draw.polygon([
+        centerX + size, centerY - size/2,
+        centerX + size, centerY + size/2,
+        centerX, centerY + size,
+        centerX, centerY
+      ]).fill('#2d2d2d').stroke({ color: '#8844ee', width: 2 });
+      
+      const left = draw.polygon([
+        centerX, centerY,
+        centerX, centerY + size,
+        centerX - size, centerY + size/2,
+        centerX - size, centerY - size/2
+      ]).fill('#252525').stroke({ color: '#8844ee', width: 2 });
+      
+      // Add icons to each face
+      const topIcons = techIcons.slice(0, 4);
+      const rightIcons = techIcons.slice(4, 8);
+      const leftIcons = techIcons.slice(8, 12);
+      
+      // Helper to position icons on faces
+      async function addIconsToFace(face, icons, positions) {
+        for (let i = 0; i < icons.length; i++) {
+          const icon = draw.image(icons[i]).size(40, 40);
+          icon.move(positions[i].x - 20, positions[i].y - 20);
+        }
       }
       
-      const cube = new THREE.Mesh(geometry, materials);
-      scene.add(cube);
+      // Icon positions for each face (center points)
+      const topPositions = [
+        { x: centerX - size/3, y: centerY - size*2/3 },
+        { x: centerX + size/3, y: centerY - size*2/3 },
+        { x: centerX - size/4, y: centerY - size/3 },
+        { x: centerX + size/4, y: centerY - size/3 }
+      ];
       
-      // Position camera
-      camera.position.z = 5;
+      const rightPositions = [
+        { x: centerX + size*2/3, y: centerY - size/4 },
+        { x: centerX + size*2/3, y: centerY + size/4 },
+        { x: centerX + size/3, y: centerY },
+        { x: centerX + size/3, y: centerY + size/3 }
+      ];
       
-      // Set initial rotation
-      cube.rotation.x = 0.5;
-      cube.rotation.y = 0.7;
+      const leftPositions = [
+        { x: centerX - size/3, y: centerY + size/3 },
+        { x: centerX - size*2/3, y: centerY + size/4 },
+        { x: centerX - size*2/3, y: centerY - size/4 },
+        { x: centerX - size/3, y: centerY }
+      ];
       
-      // Let the cube render once
-      renderer.render(scene, camera);
+      // Add all icons
+      await addIconsToFace(top, topIcons, topPositions);
+      await addIconsToFace(right, rightIcons, rightPositions);
+      await addIconsToFace(left, leftIcons, leftPositions);
       
-      // Signal that the rendering is complete
-      window.renderedCube = true;
+      // Add some 3D effect animations
+      draw.element('style').words(\`
+        @keyframes rotate {
+          0% { transform: translateX(0px) translateY(0px); }
+          25% { transform: translateX(5px) translateY(-5px); }
+          50% { transform: translateX(0px) translateY(0px); }
+          75% { transform: translateX(-5px) translateY(5px); }
+          100% { transform: translateX(0px) translateY(0px); }
+        }
+        #container { animation: rotate 8s ease-in-out infinite; }
+      \`);
+      
+      // Add "Tech Stack" text
+      draw.text("Tech Stack")
+        .font({ family: 'Arial', size: 24, weight: 'bold' })
+        .fill('#8844ee')
+        .move(centerX - 80, 50);
+      
+      // Return the SVG content
+      return draw.svg();
     }
     
-    createCube();
+    // Create and save SVG
+    async function init() {
+      const svgContent = await createTechStackCube();
+      document.body.innerHTML = svgContent;
+      
+      // Signal to puppeteer that we're done
+      window.SVGReady = true;
+    }
+    
+    init();
   </script>
 </body>
 </html>
-  `;
-  
-  return htmlContent;
-}
+`;
 
-async function captureWebpageToPNG() {
-  // Generate the HTML content
-  const htmlContent = await generateCubeHTML();
+async function generateSVG() {
+  // Make sure the scripts directory exists
+  const scriptsDir = path.join(__dirname, '..', '..', '.github', 'scripts');
+  if (!fs.existsSync(scriptsDir)) {
+    fs.mkdirSync(scriptsDir, { recursive: true });
+  }
   
   // Create a temporary HTML file
-  fs.writeFileSync('temp-cube.html', htmlContent);
+  const tempHTMLPath = path.join(scriptsDir, 'temp-svg-generator.html');
+  fs.writeFileSync(tempHTMLPath, htmlContent);
   
-  // Launch a headless browser
+  // Launch headless browser
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
-  
   const page = await browser.newPage();
   
-  // Set viewport
-  await page.setViewport({
-    width: 600,
-    height: 400,
-    deviceScaleFactor: 2 // Higher resolution
-  });
-  
   // Navigate to the HTML file
-  await page.goto(`file://${process.cwd()}/temp-cube.html`);
+  await page.goto(`file://${tempHTMLPath}`);
   
-  // Wait for the cube to render
-  await page.waitForFunction('window.renderedCube === true', { timeout: 10000 });
+  // Wait for SVG to be ready
+  await page.waitForFunction('window.SVGReady === true', { timeout: 10000 });
   
-  // Wait a bit more to ensure everything is properly rendered
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Capture the screenshot
-  const screenshot = await page.screenshot({
-    omitBackground: true,
-    type: 'png'
+  // Get the SVG content
+  const svgContent = await page.evaluate(() => {
+    return document.body.innerHTML;
   });
   
   await browser.close();
   
   // Clean up the temporary file
-  fs.unlinkSync('temp-cube.html');
+  fs.unlinkSync(tempHTMLPath);
   
-  return screenshot;
-}
-
-async function createSVG() {
-  // Capture the cube as PNG
-  const screenshot = await captureWebpageToPNG();
-  
-  // Convert the PNG to a Base64 data URL
-  const base64Image = `data:image/png;base64,${screenshot.toString('base64')}`;
-  
-  // Create an SVG with the image embedded
-  const svgContent = `
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
-  <title>Tech Stack Cube</title>
-  <image href="${base64Image}" width="600" height="400" />
-</svg>`;
-  
-  // Save the SVG file
+  // Write the SVG file
   fs.writeFileSync('tech-stack-cube.svg', svgContent);
+  
   console.log('Tech stack cube SVG generated successfully!');
 }
 
-// Execute the script
-createSVG().catch(error => {
-  console.error('Error generating tech stack cube:', error);
+// Run the generator
+generateSVG().catch(err => {
+  console.error('Error generating SVG:', err);
   process.exit(1);
 });
