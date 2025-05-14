@@ -16,16 +16,21 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        persist-credentials: true  # Important for proper commit permissions
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16'
     
+    - name: Install dependencies
+      run: npm install puppeteer
+    
     - name: Create script directory
       run: mkdir -p .github/scripts
     
-    - name: Create script file
+    - name: Create generator script
       run: |
         cat > .github/scripts/generate-tech-stack-cube.js << 'EOL'
         const puppeteer = require('puppeteer');
@@ -125,6 +130,7 @@ jobs:
               height: 50px;
               margin: 5px;
               display: inline-block;
+              filter: drop-shadow(0px 0px 3px rgba(136, 68, 238, 0.7));
             }
             .title {
               position: absolute;
@@ -254,10 +260,16 @@ jobs:
           // Clean up the temporary file
           fs.unlinkSync(tempHTMLPath);
           
-          // Write the SVG file
-          fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svgContent);
+          // Create assets directory if it doesn't exist
+          const assetsDir = path.join(process.cwd(), 'assets');
+          if (!fs.existsSync(assetsDir)) {
+            fs.mkdirSync(assetsDir, { recursive: true });
+          }
           
-          console.log('Tech stack cube SVG generated successfully!');
+          // Write the SVG file to assets directory
+          fs.writeFileSync(path.join(assetsDir, 'tech-stack-cube.svg'), svgContent);
+          
+          console.log('Tech stack cube SVG generated successfully in assets directory!');
         }
 
         // Run the generator
@@ -267,9 +279,6 @@ jobs:
         });
         EOL
     
-    - name: Install dependencies
-      run: npm install puppeteer
-    
     - name: Generate Tech Stack Cube SVG
       run: node .github/scripts/generate-tech-stack-cube.js
     
@@ -277,6 +286,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add tech-stack-cube.svg
+        git add assets/tech-stack-cube.svg
         git commit -m "Update tech stack cube SVG" || echo "No changes to commit"
         git push
