@@ -1,24 +1,24 @@
 name: Generate Tech Stack Cube
 
 on:
-  # Run on pushes to main branch
+  # Run weekly on Sunday
+  schedule:
+    - cron: '0 0 * * 0'
+  # Run on push to main branch
   push:
     branches: [ main ]
-  # Run on schedule (every day at midnight)
-  schedule:
-    - cron: '0 0 * * *'
   # Allow manual trigger
   workflow_dispatch:
 
 jobs:
-  build:
+  generate-tech-stack-svg:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16'
@@ -28,12 +28,12 @@ jobs:
         npm install puppeteer @svgdotjs/svg.js
 
     - name: Generate Tech Stack Cube SVG
-      run: node generate-tech-stack-cube.js
-      
-    - name: Commit and push changes
+      run: node .github/scripts/generate-tech-stack-cube.js
+    
+    - name: Commit and Push changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add tech-stack-cube.svg
-        git commit -m "Update tech stack cube" || echo "No changes to commit"
+        git commit -m "Update tech stack cube SVG" || echo "No changes to commit"
         git push
