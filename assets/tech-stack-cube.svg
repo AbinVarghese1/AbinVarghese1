@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400"><foreignObject width="800" height="400" x="0" y="0"><body xmlns="http://www.w3.org/1999/xhtml">
+  <div id="container">
+    <div class="title">Tech Stack</div>
+    <div class="scene">
+      <div class="cube">
+        <div class="cube__face cube__face--front"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" class="icon" alt="Tech Icon" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="icon" alt="Tech Icon" /></div>
+        <div class="cube__face cube__face--back"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" class="icon" alt="Tech Icon" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" class="icon" alt="Tech Icon" /></div>
+        <div class="cube__face cube__face--right"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="icon" alt="Tech Icon" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" class="icon" alt="Tech Icon" /></div>
+        <div class="cube__face cube__face--left"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="icon" alt="Tech Icon" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" class="icon" alt="Tech Icon" /></div>
+        <div class="cube__face cube__face--top"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="icon" alt="Tech Icon" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" class="icon" alt="Tech Icon" /></div>
+        <div class="cube__face cube__face--bottom"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" class="icon" alt="Tech Icon" /><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" class="icon" alt="Tech Icon" /></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Distribute tech icons among the faces
+    const techIcons = ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg","https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg"];
+    
+    // Function to create icon elements
+    function createIcons(face, icons) {
+      const faceEl = document.querySelector(face);
+      icons.forEach(icon =&gt; {
+        const img = document.createElement('img');
+        img.src = icon;
+        img.className = 'icon';
+        img.alt = 'Tech Icon';
+        faceEl.appendChild(img);
+      });
+    }
+
+    // Distribute the icons to the faces
+    document.addEventListener('DOMContentLoaded', () =&gt; {
+      createIcons('.cube__face--front', techIcons.slice(0, 2));
+      createIcons('.cube__face--right', techIcons.slice(2, 4));
+      createIcons('.cube__face--back', techIcons.slice(4, 6));
+      createIcons('.cube__face--left', techIcons.slice(6, 8));
+      createIcons('.cube__face--top', techIcons.slice(8, 10));
+      createIcons('.cube__face--bottom', techIcons.slice(10, 12));
+      
+      // Signal to puppeteer that we're done
+      window.SVGReady = true;
+    });
+  </script>
+
+
+</body></foreignObject></svg>
