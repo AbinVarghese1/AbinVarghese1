@@ -192,7 +192,8 @@ async function generateSVG() {
   await page.waitForFunction('window.SVGReady === true', { timeout: 10000 });
   
   // Add a small delay to ensure everything is rendered
-  await page.waitForTimeout(500);
+  // Using setTimeout instead of waitForTimeout for compatibility
+  await new Promise(resolve => setTimeout(resolve, 500));
   
   // Capture the SVG content from the page
   const svgContent = await page.evaluate(() => {
