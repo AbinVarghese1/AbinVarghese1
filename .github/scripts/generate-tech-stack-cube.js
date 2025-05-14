@@ -1,4 +1,3 @@
-const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
@@ -18,221 +17,134 @@ const techIcons = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
 ];
 
-// HTML content with 3D rotating animation
-const htmlContent = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>3D Tech Stack Cube</title>
+// Generate a pure SVG version of the rotating cube
+function generateSVG() {
+  const svgWidth = 800;
+  const svgHeight = 400;
+  const cubeSize = 200;
+  
+  // Create SVG header with animations for 3D cube
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" height="${svgHeight}">
+  <defs>
+    <!-- Define gradients for cube faces -->
+    <linearGradient id="frontGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d2d3d" />
+      <stop offset="100%" stop-color="#1a1a2e" />
+    </linearGradient>
+    <linearGradient id="rightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#252535" />
+      <stop offset="100%" stop-color="#111122" />
+    </linearGradient>
+    <linearGradient id="topGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#353545" />
+      <stop offset="100%" stop-color="#1f1f2f" />
+    </linearGradient>
+  </defs>
+  
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      overflow: hidden;
+    @keyframes rotateCube {
+      0% { transform: rotateX(15deg) rotateY(0deg); }
+      50% { transform: rotateX(15deg) rotateY(180deg); }
+      100% { transform: rotateX(15deg) rotateY(360deg); }
     }
-    #container {
-      width: 800px;
-      height: 400px;
-      perspective: 1000px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .scene {
-      width: 200px;
-      height: 200px;
-      perspective: 600px;
-      transform-style: preserve-3d;
-    }
+    
     .cube {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transform: translateZ(-100px);
-      animation: rotate 15s infinite linear;
+      animation: rotateCube 20s infinite linear;
+      transform-origin: 400px 200px;
     }
-    .cube__face {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      border: 2px solid #8844ee;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px;
-      box-sizing: border-box;
+    
+    .face {
+      stroke: #8844ee;
+      stroke-width: 2;
     }
-    .cube__face--front  { 
-      transform: rotateY(0deg) translateZ(100px); 
-      background-color: rgba(58, 58, 58, 0.8);
-    }
-    .cube__face--right  { 
-      transform: rotateY(90deg) translateZ(100px); 
-      background-color: rgba(45, 45, 45, 0.8);
-    }
-    .cube__face--back   { 
-      transform: rotateY(180deg) translateZ(100px); 
-      background-color: rgba(58, 58, 58, 0.8);
-    }
-    .cube__face--left   { 
-      transform: rotateY(-90deg) translateZ(100px); 
-      background-color: rgba(45, 45, 45, 0.8);
-    }
-    .cube__face--top    { 
-      transform: rotateX(90deg) translateZ(100px); 
-      background-color: rgba(37, 37, 37, 0.8);
-    }
-    .cube__face--bottom { 
-      transform: rotateX(-90deg) translateZ(100px); 
-      background-color: rgba(37, 37, 37, 0.8);
-    }
-    .icon {
-      width: 50px;
-      height: 50px;
-      margin: 5px;
-      display: inline-block;
-    }
+    
     .title {
-      position: absolute;
-      top: 10px;
-      width: 100%;
-      text-align: center;
-      color: #8844ee;
       font-family: Arial, sans-serif;
-      font-size: 28px;
+      font-size: 32px;
       font-weight: bold;
-      text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    }
-    @keyframes rotate {
-      0% { transform: translateZ(-100px) rotateX(0deg) rotateY(0deg); }
-      100% { transform: translateZ(-100px) rotateX(360deg) rotateY(360deg); }
+      fill: #8844ee;
+      text-anchor: middle;
     }
   </style>
-</head>
-<body>
-  <div id="container">
-    <div class="title">Tech Stack</div>
-    <div class="scene">
-      <div class="cube">
-        <div class="cube__face cube__face--front"></div>
-        <div class="cube__face cube__face--back"></div>
-        <div class="cube__face cube__face--right"></div>
-        <div class="cube__face cube__face--left"></div>
-        <div class="cube__face cube__face--top"></div>
-        <div class="cube__face cube__face--bottom"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Distribute tech icons among the faces
-    const techIcons = ${JSON.stringify(techIcons)};
-    
-    // Function to create icon elements
-    function createIcons(face, icons) {
-      const faceEl = document.querySelector(face);
-      icons.forEach(icon => {
-        const img = document.createElement('img');
-        img.src = icon;
-        img.className = 'icon';
-        img.alt = 'Tech Icon';
-        faceEl.appendChild(img);
-      });
-    }
-
-    // Distribute the icons to the faces
-    document.addEventListener('DOMContentLoaded', () => {
-      createIcons('.cube__face--front', techIcons.slice(0, 2));
-      createIcons('.cube__face--right', techIcons.slice(2, 4));
-      createIcons('.cube__face--back', techIcons.slice(4, 6));
-      createIcons('.cube__face--left', techIcons.slice(6, 8));
-      createIcons('.cube__face--top', techIcons.slice(8, 10));
-      createIcons('.cube__face--bottom', techIcons.slice(10, 12));
-      
-      // Signal to puppeteer that we're done
-      window.SVGReady = true;
-    });
-  </script>
-</body>
-</html>
+  
+  <!-- Background -->
+  <rect width="${svgWidth}" height="${svgHeight}" fill="#0d1117" />
+  
+  <!-- Title -->
+  <text x="${svgWidth/2}" y="50" class="title">Tech Stack</text>
+  
+  <!-- Container for 3D transformation -->
+  <g class="cube" transform-origin="400 200">
 `;
 
-async function generateSVG() {
-  // Make sure the scripts directory exists
-  const scriptsDir = path.join(__dirname);
-  if (!fs.existsSync(scriptsDir)) {
-    fs.mkdirSync(scriptsDir, { recursive: true });
-  }
+  // Create cube faces
+  // Front face
+  svg += `
+    <!-- Front face -->
+    <g>
+      <polygon points="300,150 500,150 500,250 300,250" fill="url(#frontGradient)" class="face" />
+      <!-- Front face icons -->
+      <image x="320" y="170" width="60" height="60" href="${techIcons[0]}" />
+      <image x="420" y="170" width="60" height="60" href="${techIcons[1]}" />
+    </g>
   
-  // Create a temporary HTML file
-  const tempHTMLPath = path.join(scriptsDir, 'temp-svg-generator.html');
-  fs.writeFileSync(tempHTMLPath, htmlContent);
+    <!-- Right face -->
+    <g>
+      <polygon points="500,150 550,175 550,275 500,250" fill="url(#rightGradient)" class="face" />
+      <!-- Right face icons -->
+      <image x="505" y="170" width="40" height="40" href="${techIcons[2]}" />
+      <image x="505" y="220" width="40" height="40" href="${techIcons[3]}" />
+    </g>
   
-  // Launch headless browser with increased viewport to capture the animation
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  });
-  const page = await browser.newPage();
+    <!-- Top face -->
+    <g>
+      <polygon points="300,150 500,150 550,175 350,175" fill="url(#topGradient)" class="face" />
+      <!-- Top face icons -->
+      <image x="350" y="145" width="40" height="40" href="${techIcons[4]}" />
+      <image x="450" y="145" width="40" height="40" href="${techIcons[5]}" />
+    </g>
   
-  // Set viewport to match the size of our container
-  await page.setViewport({
-    width: 800,
-    height: 400,
-    deviceScaleFactor: 2 // Higher resolution
-  });
+    <!-- Left face (slightly visible during rotation) -->
+    <g opacity="0">
+      <polygon points="300,150 250,175 250,275 300,250" fill="url(#rightGradient)" class="face" />
+      <!-- Left face icons will be visible during animation -->
+      <image x="265" y="170" width="40" height="40" href="${techIcons[6]}" />
+      <image x="265" y="220" width="40" height="40" href="${techIcons[7]}" />
+    </g>
   
-  // Navigate to the HTML file
-  await page.goto(`file://${tempHTMLPath}`);
-  
-  // Wait for content to be ready
-  await page.waitForFunction('window.SVGReady === true', { timeout: 10000 });
-  
-  // Add a small delay to ensure everything is rendered
-  // Using setTimeout with a promise since page.waitForTimeout isn't available in older Puppeteer
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Capture the SVG content from the page
-  const svgContent = await page.evaluate(() => {
-    // Create a new SVG element to hold our final output
-    const xmlns = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(xmlns, "svg");
-    svg.setAttribute("viewBox", "0 0 800 400");
-    svg.setAttribute("width", "800");
-    svg.setAttribute("height", "400");
+    <!-- Bottom face (slightly visible during rotation) -->
+    <g opacity="0">
+      <polygon points="300,250 500,250 550,275 350,275" fill="url(#topGradient)" class="face" />
+      <!-- Bottom face icons will be visible during animation -->
+      <image x="350" y="245" width="40" height="40" href="${techIcons[8]}" />
+      <image x="450" y="245" width="40" height="40" href="${techIcons[9]}" />
+    </g>
     
-    // Add the entire HTML content as a foreignObject
-    const foreignObject = document.createElementNS(xmlns, "foreignObject");
-    foreignObject.setAttribute("width", "800");
-    foreignObject.setAttribute("height", "400");
-    foreignObject.setAttribute("x", "0");
-    foreignObject.setAttribute("y", "0");
-    
-    // Clone the body content
-    const body = document.body.cloneNode(true);
-    foreignObject.appendChild(body);
-    svg.appendChild(foreignObject);
-    
-    // Return the SVG as a string
-    return new XMLSerializer().serializeToString(svg);
-  });
-  
-  await browser.close();
-  
-  // Clean up the temporary file
-  fs.unlinkSync(tempHTMLPath);
+    <!-- Back face (slightly visible during rotation) -->
+    <g opacity="0">
+      <polygon points="250,175 450,175 450,275 250,275" fill="url(#frontGradient)" class="face" />
+      <!-- Back face icons will be visible during animation -->
+      <image x="300" y="195" width="40" height="40" href="${techIcons[10]}" />
+      <image x="370" y="195" width="40" height="40" href="${techIcons[11]}" />
+    </g>
+  </g>
+  `;
+
+  // Add a note/guide about the tech stack
+  svg += `
+  <!-- Tech stack labels -->
+  <g transform="translate(110, 330)">
+    <text fill="#8844ee" font-family="Arial, sans-serif" font-size="16">Tech Stack: Android, C, Figma, Firebase, Flutter, GCP, Java, Pandas, Python, Dart, Android Studio, Arduino</text>
+  </g>
+  `;
+
+  // Close SVG
+  svg += '</svg>';
   
   // Write the SVG file
-  fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svgContent);
-  
+  fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svg);
   console.log('Tech stack cube SVG generated successfully!');
 }
 
 // Run the generator
-generateSVG().catch(err => {
-  console.error('Error generating SVG:', err);
-  process.exit(1);
-});
+generateSVG();
