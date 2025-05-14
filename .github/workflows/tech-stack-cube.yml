@@ -1,5 +1,4 @@
 name: Generate Tech Stack Cube 
-
 on:
   # Run weekly on Sunday
   schedule:
@@ -17,7 +16,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
+    
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
@@ -26,9 +25,12 @@ jobs:
     - name: Install dependencies
       run: |
         npm install puppeteer @svgdotjs/svg.js
-
+    
     - name: Generate Tech Stack Cube SVG
-      run: node .github/scripts/generate-tech-stack-cube.js
+      run: |
+        mkdir -p .github/scripts
+        cp ${{ github.workspace }}/.github/workflows/generate-tech-stack-cube.js .github/scripts/
+        node .github/scripts/generate-tech-stack-cube.js
     
     - name: Commit and Push changes
       run: |
