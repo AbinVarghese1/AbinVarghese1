@@ -24,12 +24,20 @@ jobs:
     
     - name: Install dependencies
       run: |
-        npm install puppeteer @svgdotjs/svg.js
+        npm install puppeteer
+    
+    - name: Create scripts directory
+      run: |
+        mkdir -p .github/scripts
+    
+    - name: Copy script to scripts directory
+      run: |
+        if [ ! -f .github/scripts/generate-tech-stack-cube.js ]; then
+          cp .github/workflows/generate-tech-stack-cube.js .github/scripts/ || echo "Script not found in workflows, using existing script"
+        fi
     
     - name: Generate Tech Stack Cube SVG
       run: |
-        mkdir -p .github/scripts
-        cp ${{ github.workspace }}/.github/workflows/generate-tech-stack-cube.js .github/scripts/
         node .github/scripts/generate-tech-stack-cube.js
     
     - name: Commit and Push changes
