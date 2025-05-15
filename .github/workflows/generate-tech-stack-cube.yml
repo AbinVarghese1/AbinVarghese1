@@ -52,12 +52,6 @@ jobs:
           // Create SVG with proper CSS 3D transforms
           let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
             <defs>
-              <!-- Define the tech icons -->
-              ${techIcons.map((icon, i) => `
-              <pattern id="icon-${i}" patternUnits="userSpaceOnUse" width="100" height="100">
-                <image href="${icon}" x="15" y="15" width="70" height="70" />
-              </pattern>`).join('')}
-              
               <style>
                 @keyframes rotate {
                   0% { transform: rotate3d(1, 1, 0, 0deg); }
@@ -65,9 +59,9 @@ jobs:
                 }
                 
                 .cube-wrapper {
-                  width: 300px;
-                  height: 300px;
-                  perspective: 1000px;
+                  width: 200px;
+                  height: 200px;
+                  perspective: 1200px;
                   transform-style: preserve-3d;
                 }
                 
@@ -101,156 +95,118 @@ jobs:
                   width: 100%;
                   height: 100%;
                   background-color: rgba(42, 42, 64, 0.9);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  overflow: hidden;
+                }
+                
+                .tech-icon {
+                  width: 70%;
+                  height: 70%;
+                  object-fit: contain;
                 }
               </style>
             </defs>
             
             <!-- Group for the 3D cube -->
-            <foreignObject x="100" y="100" width="300" height="300">
+            <foreignObject x="150" y="150" width="200" height="200">
               <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
                 <div class="cube-wrapper">
                   <div class="cube">
                     <!-- Front face -->
                     <div class="cube__face cube__face--front">
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-0)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[0]}" alt="Android" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-1)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[1]}" alt="C" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-2)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[2]}" alt="Figma" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-3)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[3]}" alt="Firebase" />
                       </div>
                     </div>
                     
                     <!-- Right face -->
                     <div class="cube__face cube__face--right">
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-4)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[4]}" alt="Flutter" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-5)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[5]}" alt="Google Cloud" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-6)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[6]}" alt="Java" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-7)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[7]}" alt="Pandas" />
                       </div>
                     </div>
                     
                     <!-- Back face -->
                     <div class="cube__face cube__face--back">
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-8)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[8]}" alt="Python" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-9)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[9]}" alt="Dart" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-10)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[10]}" alt="Android Studio" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-11)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[11]}" alt="Arduino" />
                       </div>
                     </div>
                     
                     <!-- Left face -->
                     <div class="cube__face cube__face--left">
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-0)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[0]}" alt="Android" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-3)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[3]}" alt="Firebase" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-6)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[6]}" alt="Java" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-9)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[9]}" alt="Dart" />
                       </div>
                     </div>
                     
                     <!-- Top face -->
                     <div class="cube__face cube__face--top">
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-2)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[2]}" alt="Figma" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-5)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[5]}" alt="Google Cloud" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-8)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[8]}" alt="Python" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-11)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[11]}" alt="Arduino" />
                       </div>
                     </div>
                     
                     <!-- Bottom face -->
                     <div class="cube__face cube__face--bottom">
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-1)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[1]}" alt="C" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-4)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[4]}" alt="Flutter" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-7)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[7]}" alt="Pandas" />
                       </div>
                       <div class="icon-cell">
-                        <svg width="100%" height="100%" viewBox="0 0 100 100">
-                          <rect width="100" height="100" fill="url(#icon-10)" />
-                        </svg>
+                        <img class="tech-icon" src="${techIcons[10]}" alt="Android Studio" />
                       </div>
                     </div>
                   </div>
