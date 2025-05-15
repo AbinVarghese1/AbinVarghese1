@@ -19,73 +19,214 @@ const techIcons = [
 
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
-  // Create SVG with both CSS and SVG-native 3D transforms
-  // This hybrid approach provides better compatibility
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
+  // Create SVG with proper CSS 3D transforms
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
     <defs>
-      <!-- Define filters for 3D effect -->
-      <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.3"/>
-      </filter>
-      
-      <!-- Define patterns for the tech icons -->
+      <!-- Define the tech icons -->
       ${techIcons.map((icon, i) => `
-      <pattern id="tech-${i}" patternUnits="userSpaceOnUse" width="100" height="100">
+      <pattern id="icon-${i}" patternUnits="userSpaceOnUse" width="100" height="100">
         <image href="${icon}" x="15" y="15" width="70" height="70" />
       </pattern>`).join('')}
+      
+      <style>
+        @keyframes rotate {
+          0% { transform: rotate3d(1, 1, 0, 0deg); }
+          100% { transform: rotate3d(1, 1, 0, 360deg); }
+        }
+        
+        .cube-wrapper {
+          width: 300px;
+          height: 300px;
+          perspective: 1000px;
+          transform-style: preserve-3d;
+        }
+        
+        .cube {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-style: preserve-3d;
+          transform: translateZ(-100px);
+          animation: rotate 15s infinite linear;
+        }
+        
+        .cube__face {
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          border: 2px solid #8844ee;
+          display: grid;
+          grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+          gap: 2px;
+        }
+        
+        .cube__face--front  { transform: rotateY(0deg) translateZ(100px); }
+        .cube__face--right  { transform: rotateY(90deg) translateZ(100px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+        .cube__face--top    { transform: rotateX(90deg) translateZ(100px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        .icon-cell {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(42, 42, 64, 0.9);
+        }
+      </style>
     </defs>
     
-    <style>
-      @keyframes rotate3d {
-        0% { transform: rotate3d(0.5, 1, 0.3, 0deg); }
-        100% { transform: rotate3d(0.5, 1, 0.3, 360deg); }
-      }
-      
-      .cube {
-        transform-style: preserve-3d;
-        transform-origin: 250px 250px;
-        animation: rotate3d 20s infinite linear;
-      }
-      
-      .face {
-        stroke: #8844ee;
-        stroke-width: 2px;
-        filter: url(#shadow);
-      }
-    </style>
-    
-    <!-- Cube group with animation -->
-    <g class="cube">
-      <!-- Front face -->
-      <g transform="translate(150, 150)">
-        <rect class="face" width="200" height="200" fill="#2a2a40" />
-        <!-- 2x2 grid of cells with tech icons -->
-        <rect x="0" y="0" width="100" height="100" fill="url(#tech-0)" stroke="#8844ee" />
-        <rect x="100" y="0" width="100" height="100" fill="url(#tech-1)" stroke="#8844ee" />
-        <rect x="0" y="100" width="100" height="100" fill="url(#tech-2)" stroke="#8844ee" />
-        <rect x="100" y="100" width="100" height="100" fill="url(#tech-3)" stroke="#8844ee" />
-      </g>
-      
-      <!-- Right face - with skew transform -->
-      <g transform="translate(350, 150) skewY(45) scale(0.707, 1)">
-        <rect class="face" width="200" height="200" fill="#252538" />
-        <!-- 2x2 grid of cells with tech icons -->
-        <rect x="0" y="0" width="100" height="100" fill="url(#tech-4)" stroke="#8844ee" />
-        <rect x="100" y="0" width="100" height="100" fill="url(#tech-5)" stroke="#8844ee" />
-        <rect x="0" y="100" width="100" height="100" fill="url(#tech-6)" stroke="#8844ee" />
-        <rect x="100" y="100" width="100" height="100" fill="url(#tech-7)" stroke="#8844ee" />
-      </g>
-      
-      <!-- Top face - with skew transform -->
-      <g transform="translate(150, 150) skewX(45) scale(1, 0.707)">
-        <rect class="face" width="200" height="200" fill="#1f1f30" />
-        <!-- 2x2 grid of cells with tech icons -->
-        <rect x="0" y="0" width="100" height="100" fill="url(#tech-8)" stroke="#8844ee" />
-        <rect x="100" y="0" width="100" height="100" fill="url(#tech-9)" stroke="#8844ee" />
-        <rect x="0" y="100" width="100" height="100" fill="url(#tech-10)" stroke="#8844ee" />
-        <rect x="100" y="100" width="100" height="100" fill="url(#tech-11)" stroke="#8844ee" />
-      </g>
-    </g>
+    <!-- Group for the 3D cube -->
+    <foreignObject x="100" y="100" width="300" height="300">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
+        <div class="cube-wrapper">
+          <div class="cube">
+            <!-- Front face -->
+            <div class="cube__face cube__face--front">
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-0)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-1)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-2)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-3)" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Right face -->
+            <div class="cube__face cube__face--right">
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-4)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-5)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-6)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-7)" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Back face -->
+            <div class="cube__face cube__face--back">
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-8)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-9)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-10)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-11)" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Left face -->
+            <div class="cube__face cube__face--left">
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-0)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-3)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-6)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-9)" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Top face -->
+            <div class="cube__face cube__face--top">
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-2)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-5)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-8)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-11)" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Bottom face -->
+            <div class="cube__face cube__face--bottom">
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-1)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-4)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-7)" />
+                </svg>
+              </div>
+              <div class="icon-cell">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
+                  <rect width="100" height="100" fill="url(#icon-10)" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
   </svg>`;
   
   // Write the SVG file
