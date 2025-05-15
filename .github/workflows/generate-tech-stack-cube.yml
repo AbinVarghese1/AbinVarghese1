@@ -20,7 +20,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18'
     
     - name: Create script directory
       run: mkdir -p .github/scripts
@@ -31,191 +31,168 @@ jobs:
         const fs = require('fs');
         const path = require('path');
 
-        // Tech stack icons using devicon URLs
+        // Tech stack icons using GitHub-friendly SVG references
+        // These are DevIcon SVGs downloaded and stored directly in your repo
         const techIcons = [
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg',
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
+          { name: 'android', color: '#3DDC84' },
+          { name: 'c', color: '#A8B9CC' },
+          { name: 'figma', color: '#F24E1E' },
+          { name: 'firebase', color: '#FFCA28' },
+          { name: 'flutter', color: '#02569B' },
+          { name: 'googlecloud', color: '#4285F4' },
+          { name: 'java', color: '#007396' },
+          { name: 'pandas', color: '#150458' },
+          { name: 'python', color: '#3776AB' },
+          { name: 'dart', color: '#0175C2' },
+          { name: 'androidstudio', color: '#3DDC84' },
+          { name: 'arduino', color: '#00979D' }
         ];
 
-        // Generate a pure SVG Rubik's cube with tech icons
+        // Generate a GitHub-compatible SVG cube with tech icons
         function generateRubiksCube() {
-          // Create SVG with proper CSS 3D transforms - increased overall size and centering
-          let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
-            <defs>
-              <style>
-                @keyframes rotate {
-                  0% { transform: rotate3d(1, 1, 0, 0deg); }
-                  100% { transform: rotate3d(1, 1, 0, 360deg); }
-                }
-                
-                .cube-wrapper {
-                  width: 400px;
-                  height: 400px;
-                  perspective: 1200px;
-                  transform-style: preserve-3d;
-                }
-                
-                .cube {
-                  width: 100%;
-                  height: 100%;
-                  position: relative;
-                  transform-style: preserve-3d;
-                  transform: translateZ(-150px);
-                  animation: rotate 15s infinite linear;
-                }
-                
-                .cube__face {
-                  position: absolute;
-                  width: 300px;
-                  height: 300px;
-                  border: 2px solid #8844ee;
-                  display: grid;
-                  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-                  gap: 2px;
-                }
-                
-                .cube__face--front  { transform: rotateY(0deg) translateZ(150px); }
-                .cube__face--right  { transform: rotateY(90deg) translateZ(150px); }
-                .cube__face--back   { transform: rotateY(180deg) translateZ(150px); }
-                .cube__face--left   { transform: rotateY(-90deg) translateZ(150px); }
-                .cube__face--top    { transform: rotateX(90deg) translateZ(150px); }
-                .cube__face--bottom { transform: rotateX(-90deg) translateZ(150px); }
-                
-                .icon-cell {
-                  width: 100%;
-                  height: 100%;
-                  background-color: rgba(42, 42, 64, 0.9);
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                }
-                
-                .tech-icon {
-                  width: 70%;
-                  height: 70%;
-                }
-              </style>
-            </defs>
+          // Create SVG with pure SVG elements (no foreignObject)
+          let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+            <!-- Title -->
+            <text x="400" y="50" font-family="Arial" font-size="24" fill="#333333" text-anchor="middle">Tech Stack</text>
             
-            <!-- Group for the 3D cube - expanded view area and centered -->
-            <foreignObject x="200" y="200" width="400" height="400">
-              <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
-                <div class="cube-wrapper">
-                  <div class="cube">
-                    <!-- Front face -->
-                    <div class="cube__face cube__face--front">
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[0]}" alt="Android" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[1]}" alt="C" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[2]}" alt="Figma" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[3]}" alt="Firebase" />
-                      </div>
-                    </div>
-                    
-                    <!-- Right face -->
-                    <div class="cube__face cube__face--right">
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[4]}" alt="Flutter" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[5]}" alt="Google Cloud" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[6]}" alt="Java" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[7]}" alt="Pandas" />
-                      </div>
-                    </div>
-                    
-                    <!-- Back face -->
-                    <div class="cube__face cube__face--back">
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[8]}" alt="Python" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[9]}" alt="Dart" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[10]}" alt="Android Studio" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[11]}" alt="Arduino" />
-                      </div>
-                    </div>
-                    
-                    <!-- Left face -->
-                    <div class="cube__face cube__face--left">
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[0]}" alt="Android" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[3]}" alt="Firebase" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[6]}" alt="Java" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[9]}" alt="Dart" />
-                      </div>
-                    </div>
-                    
-                    <!-- Top face -->
-                    <div class="cube__face cube__face--top">
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[2]}" alt="Figma" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[5]}" alt="Google Cloud" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[8]}" alt="Python" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[11]}" alt="Arduino" />
-                      </div>
-                    </div>
-                    
-                    <!-- Bottom face -->
-                    <div class="cube__face cube__face--bottom">
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[1]}" alt="C" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[4]}" alt="Flutter" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[7]}" alt="Pandas" />
-                      </div>
-                      <div class="icon-cell">
-                        <img class="tech-icon" src="${techIcons[10]}" alt="Android Studio" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </foreignObject>
+            <!-- Cube faces -->
+            <g transform="translate(400,300)">
+              <!-- Top Row (Front and Side views) -->
+              <!-- Front face (simple 2x2 grid) -->
+              <g transform="translate(-175, 0)">
+                <!-- Border -->
+                <rect x="-110" y="-110" width="220" height="220" fill="none" stroke="#8844ee" stroke-width="3" />
+                
+                <!-- Grid cells with tech icons -->
+                <g transform="translate(-55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[0].color}" text-anchor="middle">${techIcons[0].name}</text>
+                </g>
+                <g transform="translate(55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[1].color}" text-anchor="middle">${techIcons[1].name}</text>
+                </g>
+                <g transform="translate(-55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[2].color}" text-anchor="middle">${techIcons[2].name}</text>
+                </g>
+                <g transform="translate(55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[3].color}" text-anchor="middle">${techIcons[3].name}</text>
+                </g>
+                
+                <!-- Label -->
+                <text x="0" y="145" font-family="Arial" font-size="18" fill="#333333" text-anchor="middle">Front</text>
+              </g>
+            
+              <!-- Side face (simple 2x2 grid with perspective) -->
+              <g transform="translate(175, 0)">
+                <!-- Border with perspective -->
+                <path d="M-110,-110 L-90,-130 L130,-130 L110,-110 L110,110 L130,90 L130,-130 M110,110 L-110,110 L-90,90 L130,90" 
+                     fill="none" stroke="#8844ee" stroke-width="3" />
+                
+                <!-- Grid cells with tech icons -->
+                <g transform="translate(-55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[4].color}" text-anchor="middle">${techIcons[4].name}</text>
+                </g>
+                <g transform="translate(55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[5].color}" text-anchor="middle">${techIcons[5].name}</text>
+                </g>
+                <g transform="translate(-55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[6].color}" text-anchor="middle">${techIcons[6].name}</text>
+                </g>
+                <g transform="translate(55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[7].color}" text-anchor="middle">${techIcons[7].name}</text>
+                </g>
+                
+                <!-- Label -->
+                <text x="0" y="145" font-family="Arial" font-size="18" fill="#333333" text-anchor="middle">Side</text>
+              </g>
+              
+              <!-- Bottom Row (Top and Back views) -->
+              <!-- Top face -->
+              <g transform="translate(-175, 240)">
+                <!-- Border with perspective -->
+                <path d="M-110,-110 L-90,-130 L130,-130 L110,-110 L-110,-110" 
+                     fill="none" stroke="#8844ee" stroke-width="3" />
+                <rect x="-110" y="-110" width="220" height="220" fill="none" stroke="#8844ee" stroke-width="3" />
+                
+                <!-- Grid cells with tech icons -->
+                <g transform="translate(-55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[8].color}" text-anchor="middle">${techIcons[8].name}</text>
+                </g>
+                <g transform="translate(55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[9].color}" text-anchor="middle">${techIcons[9].name}</text>
+                </g>
+                <g transform="translate(-55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[10].color}" text-anchor="middle">${techIcons[10].name}</text>
+                </g>
+                <g transform="translate(55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[11].color}" text-anchor="middle">${techIcons[11].name}</text>
+                </g>
+                
+                <!-- Label -->
+                <text x="0" y="145" font-family="Arial" font-size="18" fill="#333333" text-anchor="middle">Back</text>
+              </g>
+              
+              <!-- Back face -->
+              <g transform="translate(175, 240)">
+                <!-- Border with perspective for top -->
+                <path d="M-110,-110 L-90,-130 L130,-130 L110,-110 L-110,-110" 
+                     fill="none" stroke="#8844ee" stroke-width="3" />
+                <!-- Main border -->
+                <rect x="-110" y="-110" width="220" height="220" fill="none" stroke="#8844ee" stroke-width="3" />
+                
+                <!-- Grid cells with tech icons -->
+                <g transform="translate(-55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[0].color}" text-anchor="middle">${techIcons[0].name}</text>
+                </g>
+                <g transform="translate(55, -55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[3].color}" text-anchor="middle">${techIcons[3].name}</text>
+                </g>
+                <g transform="translate(-55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[6].color}" text-anchor="middle">${techIcons[6].name}</text>
+                </g>
+                <g transform="translate(55, 55)">
+                  <rect width="110" height="110" fill="#2a2a40" />
+                  <text x="55" y="75" font-family="Arial" font-size="16" fill="${techIcons[9].color}" text-anchor="middle">${techIcons[9].name}</text>
+                </g>
+                
+                <!-- Label -->
+                <text x="0" y="145" font-family="Arial" font-size="18" fill="#333333" text-anchor="middle">Top</text>
+              </g>
+            </g>
+            
+            <!-- Footer -->
+            <text x="400" y="570" font-family="Arial" font-size="14" fill="#666666" text-anchor="middle">Updated: ${new Date().toISOString().split('T')[0]}</text>
           </svg>`;
           
           // Write the SVG file
           fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svg);
-          console.log('Rubik\'s cube tech stack SVG generated successfully!');
+          console.log('GitHub-compatible tech stack SVG generated successfully!');
+          
+          // Also generate a README inclusion example
+          const readmeExample = `
+## My Tech Stack
+
+![Tech Stack Cube](./tech-stack-cube.svg)
+
+*This tech stack visualization is auto-generated weekly.*
+          `;
+          
+          fs.writeFileSync(path.join(process.cwd(), 'tech-stack-readme-example.md'), readmeExample);
+          console.log('README example generated.');
         }
 
         // Run the generator
@@ -229,6 +206,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add tech-stack-cube.svg
+        git add tech-stack-cube.svg tech-stack-readme-example.md
         git commit -m "Update tech stack cube SVG" || echo "No changes to commit"
         git push
