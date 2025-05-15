@@ -47,133 +47,176 @@ jobs:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
         ];
 
-        // Generate a true 3D SVG Rubik's cube with tech icons
+        // Generate a pure SVG Rubik's cube with tech icons
         function generateRubiksCube() {
-          const svgWidth = 500;
-          const svgHeight = 500;
-          const cubeSize = 200;
-          
-          // Create SVG header with proper 3D CSS transformations
-          let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${svgWidth} ${svgHeight}">
-          <defs>
-            <!-- Define pattern for each tech icon -->
-            ${techIcons.map((icon, index) => `
-            <pattern id="icon-${index}" patternUnits="userSpaceOnUse" width="80" height="80">
-              <image href="${icon}" width="80" height="80" />
-            </pattern>
-            `).join('')}
-          </defs>
-          
-          <style>
-            @keyframes rotate {
-              0% { transform: rotate3d(1, 1, 0, 30deg); }
-              25% { transform: rotate3d(0, 1, 0, 120deg); }
-              50% { transform: rotate3d(1, 0, 1, 210deg); }
-              75% { transform: rotate3d(0, 1, 1, 300deg); }
-              100% { transform: rotate3d(1, 1, 0, 390deg); }
-            }
-            .cube-container {
-              transform-style: preserve-3d;
-              perspective: 1200px;
-              perspective-origin: center;
-            }
-            .cube {
-              transform-style: preserve-3d;
-              transform-origin: ${cubeSize/2}px ${cubeSize/2}px ${-cubeSize/2}px;
-              animation: rotate 20s infinite linear;
-            }
-            .face {
-              position: absolute;
-              width: ${cubeSize}px;
-              height: ${cubeSize}px;
-              stroke: #8844ee;
-              stroke-width: 2;
-              stroke-linejoin: round;
-            }
-            .front { transform: translateZ(${cubeSize/2}px); }
-            .back { transform: rotateY(180deg) translateZ(${cubeSize/2}px); }
-            .right { transform: rotateY(90deg) translateZ(${cubeSize/2}px); }
-            .left { transform: rotateY(-90deg) translateZ(${cubeSize/2}px); }
-            .top { transform: rotateX(90deg) translateZ(${cubeSize/2}px); }
-            .bottom { transform: rotateX(-90deg) translateZ(${cubeSize/2}px); }
+          // Create SVG with proper CSS 3D transforms
+          let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+            <defs>
+              <!-- Inline the tech icons as data URLs to avoid CORS issues -->
+              <style>
+                @keyframes rotate {
+                  0% { transform: rotate3d(1, 1, 0, 0deg); }
+                  100% { transform: rotate3d(1, 1, 0, 360deg); }
+                }
+                
+                .cube-wrapper {
+                  width: 300px;
+                  height: 300px;
+                  perspective: 1000px;
+                  transform-style: preserve-3d;
+                }
+                
+                .cube {
+                  width: 100%;
+                  height: 100%;
+                  position: relative;
+                  transform-style: preserve-3d;
+                  transform: translateZ(-100px);
+                  animation: rotate 15s infinite linear;
+                }
+                
+                .cube__face {
+                  position: absolute;
+                  width: 200px;
+                  height: 200px;
+                  border: 2px solid #8844ee;
+                  display: grid;
+                  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+                  gap: 2px;
+                }
+                
+                .cube__face--front  { transform: rotateY(0deg) translateZ(100px); }
+                .cube__face--right  { transform: rotateY(90deg) translateZ(100px); }
+                .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+                .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+                .cube__face--top    { transform: rotateX(90deg) translateZ(100px); }
+                .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+                
+                .icon-cell {
+                  width: 100%;
+                  height: 100%;
+                  background-color: rgba(42, 42, 64, 0.9);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+                
+                .icon {
+                  width: 70%;
+                  height: 70%;
+                }
+              </style>
+            </defs>
             
-            /* Grid cells for each face */
-            .cell {
-              width: ${cubeSize/2}px;
-              height: ${cubeSize/2}px;
-              stroke: #8844ee;
-              stroke-width: 1;
-            }
-          </style>
-          
-          <!-- Center the drawing -->
-          <g transform="translate(${svgWidth/2 - cubeSize/2}, ${svgHeight/2 - cubeSize/2})">
-            <!-- The 3D cube with animation -->
-            <g class="cube-container">
-              <g class="cube">
-                <!-- Front face -->
-                <g class="face front">
-                  <rect width="${cubeSize}" height="${cubeSize}" fill="#2a2a40" />
-                  <rect x="0" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-0)" class="cell" />
-                  <rect x="${cubeSize/2}" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-1)" class="cell" />
-                  <rect x="0" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-2)" class="cell" />
-                  <rect x="${cubeSize/2}" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-3)" class="cell" />
-                </g>
-                
-                <!-- Back face -->
-                <g class="face back">
-                  <rect width="${cubeSize}" height="${cubeSize}" fill="#222234" />
-                  <!-- Mirror pattern for back face for visual interest -->
-                  <rect x="0" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-4)" class="cell" />
-                  <rect x="${cubeSize/2}" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-5)" class="cell" />
-                  <rect x="0" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-6)" class="cell" />
-                  <rect x="${cubeSize/2}" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-7)" class="cell" />
-                </g>
-                
-                <!-- Right face -->
-                <g class="face right">
-                  <rect width="${cubeSize}" height="${cubeSize}" fill="#252538" />
-                  <rect x="0" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-8)" class="cell" />
-                  <rect x="${cubeSize/2}" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-9)" class="cell" />
-                  <rect x="0" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-10)" class="cell" />
-                  <rect x="${cubeSize/2}" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-11)" class="cell" />
-                </g>
-                
-                <!-- Left face -->
-                <g class="face left">
-                  <rect width="${cubeSize}" height="${cubeSize}" fill="#252538" />
-                  <!-- Use some icons for visual consistency -->
-                  <rect x="0" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-0)" class="cell" />
-                  <rect x="${cubeSize/2}" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-3)" class="cell" />
-                  <rect x="0" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-6)" class="cell" />
-                  <rect x="${cubeSize/2}" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-9)" class="cell" />
-                </g>
-                
-                <!-- Top face -->
-                <g class="face top">
-                  <rect width="${cubeSize}" height="${cubeSize}" fill="#1f1f30" />
-                  <rect x="0" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-4)" class="cell" />
-                  <rect x="${cubeSize/2}" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-5)" class="cell" />
-                  <rect x="0" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-10)" class="cell" />
-                  <rect x="${cubeSize/2}" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-11)" class="cell" />
-                </g>
-                
-                <!-- Bottom face -->
-                <g class="face bottom">
-                  <rect width="${cubeSize}" height="${cubeSize}" fill="#1f1f30" />
-                  <rect x="0" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-2)" class="cell" />
-                  <rect x="${cubeSize/2}" y="0" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-7)" class="cell" />
-                  <rect x="0" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-8)" class="cell" />
-                  <rect x="${cubeSize/2}" y="${cubeSize/2}" width="${cubeSize/2}" height="${cubeSize/2}" fill="url(#icon-1)" class="cell" />
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>`;
+            <!-- Group for the 3D cube -->
+            <foreignObject x="50" y="50" width="400" height="400">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
+                <div class="cube-wrapper">
+                  <div class="cube">
+                    <!-- Front face -->
+                    <div class="cube__face cube__face--front">
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[0]}" alt="Android" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[1]}" alt="C" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[2]}" alt="Figma" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[3]}" alt="Firebase" />
+                      </div>
+                    </div>
+                    
+                    <!-- Right face -->
+                    <div class="cube__face cube__face--right">
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[4]}" alt="Flutter" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[5]}" alt="Google Cloud" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[6]}" alt="Java" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[7]}" alt="Pandas" />
+                      </div>
+                    </div>
+                    
+                    <!-- Back face -->
+                    <div class="cube__face cube__face--back">
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[8]}" alt="Python" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[9]}" alt="Dart" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[10]}" alt="Android Studio" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[11]}" alt="Arduino" />
+                      </div>
+                    </div>
+                    
+                    <!-- Left face -->
+                    <div class="cube__face cube__face--left">
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[0]}" alt="Android" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[3]}" alt="Firebase" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[6]}" alt="Java" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[9]}" alt="Dart" />
+                      </div>
+                    </div>
+                    
+                    <!-- Top face -->
+                    <div class="cube__face cube__face--top">
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[2]}" alt="Figma" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[5]}" alt="Google Cloud" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[8]}" alt="Python" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[11]}" alt="Arduino" />
+                      </div>
+                    </div>
+                    
+                    <!-- Bottom face -->
+                    <div class="cube__face cube__face--bottom">
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[1]}" alt="C" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[4]}" alt="Flutter" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[7]}" alt="Pandas" />
+                      </div>
+                      <div class="icon-cell">
+                        <img class="icon" src="${techIcons[10]}" alt="Android Studio" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </foreignObject>
+          </svg>`;
           
           // Write the SVG file
           fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svg);
-          console.log('Improved Rubik\'s cube tech stack SVG generated successfully!');
+          console.log('Rubik\'s cube tech stack SVG generated successfully!');
         }
 
         // Run the generator
