@@ -21,6 +21,12 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
   </a>
 </div>
 
+
+###
+<h2 align="left">Tech Stack</h2>
+###
+
+
 ###
 <div align="center">
   <img src="tech-stack-cube.svg" width="600" alt="Tech Stack Cube" />
