@@ -19,7 +19,7 @@ const techIcons = [
 
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
-  // Create SVG with proper CSS 3D transforms - reduced overall size but kept proportions the same
+  // Create SVG with proper CSS 3D transforms - increased viewing window size
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
     <defs>
       <style>
@@ -29,8 +29,8 @@ function generateRubiksCube() {
         }
         
         .cube-wrapper {
-          width: 300px;
-          height: 300px;
+          width: 500px;
+          height: 500px;
           perspective: 1000px;
           transform-style: preserve-3d;
         }
@@ -77,8 +77,8 @@ function generateRubiksCube() {
       </style>
     </defs>
     
-    <!-- Group for the 3D cube - reduced view area and kept centered -->
-    <foreignObject x="150" y="150" width="300" height="300">
+    <!-- Group for the 3D cube - increased viewing window size while maintaining center position -->
+    <foreignObject x="50" y="50" width="500" height="500">
       <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
         <div class="cube-wrapper">
           <div class="cube">
