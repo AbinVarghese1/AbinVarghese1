@@ -19,8 +19,9 @@ const techIcons = [
 
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
-  // Create SVG with improved compatibility for GitHub README
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 600">
+  // Create SVG with both CSS and SVG-native 3D transforms
+  // This hybrid approach provides better compatibility
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
     <defs>
       <!-- Define filters for 3D effect -->
       <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -30,7 +31,7 @@ function generateRubiksCube() {
       <!-- Define patterns for the tech icons -->
       ${techIcons.map((icon, i) => `
       <pattern id="tech-${i}" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image xlink:href="${icon}" x="15" y="15" width="70" height="70" />
+        <image href="${icon}" x="15" y="15" width="70" height="70" />
       </pattern>`).join('')}
     </defs>
     
@@ -42,7 +43,7 @@ function generateRubiksCube() {
       
       .cube {
         transform-style: preserve-3d;
-        transform-origin: 300px 300px;
+        transform-origin: 250px 250px;
         animation: rotate3d 20s infinite linear;
       }
       
@@ -56,7 +57,7 @@ function generateRubiksCube() {
     <!-- Cube group with animation -->
     <g class="cube">
       <!-- Front face -->
-      <g transform="translate(200, 200)">
+      <g transform="translate(150, 150)">
         <rect class="face" width="200" height="200" fill="#2a2a40" />
         <!-- 2x2 grid of cells with tech icons -->
         <rect x="0" y="0" width="100" height="100" fill="url(#tech-0)" stroke="#8844ee" />
@@ -66,7 +67,7 @@ function generateRubiksCube() {
       </g>
       
       <!-- Right face - with skew transform -->
-      <g transform="translate(400, 200) skewY(45) scale(0.707, 1)">
+      <g transform="translate(350, 150) skewY(45) scale(0.707, 1)">
         <rect class="face" width="200" height="200" fill="#252538" />
         <!-- 2x2 grid of cells with tech icons -->
         <rect x="0" y="0" width="100" height="100" fill="url(#tech-4)" stroke="#8844ee" />
@@ -76,7 +77,7 @@ function generateRubiksCube() {
       </g>
       
       <!-- Top face - with skew transform -->
-      <g transform="translate(200, 200) skewX(45) scale(1, 0.707) translate(0, -200)">
+      <g transform="translate(150, 150) skewX(45) scale(1, 0.707)">
         <rect class="face" width="200" height="200" fill="#1f1f30" />
         <!-- 2x2 grid of cells with tech icons -->
         <rect x="0" y="0" width="100" height="100" fill="url(#tech-8)" stroke="#8844ee" />
