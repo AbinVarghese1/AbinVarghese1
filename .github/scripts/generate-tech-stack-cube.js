@@ -19,8 +19,8 @@ const techIcons = [
 
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
-  // Create SVG with proper CSS 3D transforms - increased viewing window size and better centering
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  // Create SVG with proper CSS 3D transforms - significantly increased viewing area
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
     <defs>
       <style>
         @keyframes rotate {
@@ -28,10 +28,18 @@ function generateRubiksCube() {
           100% { transform: rotate3d(1, 1, 0, 360deg); }
         }
         
+        .cube-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+        }
+        
         .cube-wrapper {
-          width: 700px;
-          height: 700px;
-          perspective: 1500px;
+          width: 800px;
+          height: 800px;
+          perspective: 2000px;
           transform-style: preserve-3d;
         }
         
@@ -52,6 +60,8 @@ function generateRubiksCube() {
           display: grid;
           grid-template: repeat(2, 1fr) / repeat(2, 1fr);
           gap: 3px;
+          left: 250px;
+          top: 250px;
         }
         
         .cube__face--front  { transform: rotateY(0deg) translateZ(150px); }
@@ -77,9 +87,9 @@ function generateRubiksCube() {
       </style>
     </defs>
     
-    <!-- Group for the 3D cube - significantly increased viewing window and better centering -->
-    <foreignObject x="50" y="50" width="700" height="700">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
+    <!-- Group for the 3D cube - much larger viewing area with proper centering -->
+    <foreignObject x="0" y="0" width="1200" height="1200">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="cube-container">
         <div class="cube-wrapper">
           <div class="cube">
             <!-- Front face -->
