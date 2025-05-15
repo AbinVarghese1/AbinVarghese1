@@ -1,28 +1,27 @@
 const fs = require('fs');
 const path = require('path');
 
-function generateRubiksCube() {
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+function generateTechStackCube() {
+  // Create SVG for GitHub README - using a flattened cube display
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
     <style>
-      @keyframes rotateCube {
-        0% { transform: rotate3d(1, 1, 0, 0deg); }
-        100% { transform: rotate3d(1, 1, 0, 360deg); }
-      }
-      
-      .cube {
-        animation: rotateCube 15s infinite linear;
-        transform-style: preserve-3d;
-        transform-origin: center;
-      }
-      
       .face {
         stroke: #8844ee;
-        stroke-width: 2;
-        fill: none;
+        stroke-width: 3;
       }
       
       .cell {
         fill: rgba(42, 42, 64, 0.9);
+        stroke: #8844ee;
+        stroke-width: 2;
+      }
+      
+      .face-label {
+        font-family: 'Arial', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        fill: #ffffff;
+        text-anchor: middle;
       }
       
       /* Define tech icon colors */
@@ -38,11 +37,6 @@ function generateRubiksCube() {
       .dart { fill: #0175C2; }
       .androidstudio { fill: #3DDC84; }
       .arduino { fill: #00979D; }
-      
-      .icon {
-        width: 100px;
-        height: 100px;
-      }
     </style>
     
     <!-- Definitions for tech icons -->
@@ -113,144 +107,145 @@ function generateRubiksCube() {
       </g>
     </defs>
     
-    <!-- Group for the 3D cube -->
-    <g transform="translate(400,400)" class="cube">
-      <!-- Front face -->
-      <g transform="translate(0,0,150)">
-        <!-- Face background -->
-        <rect x="-150" y="-150" width="300" height="300" class="face"/>
-        
-        <!-- Cell 1-1 -->
-        <rect x="-150" y="-150" width="148" height="148" class="cell"/>
-        <use href="#android-icon" x="-125" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 1-2 -->
-        <rect x="2" y="-150" width="148" height="148" class="cell"/>
-        <use href="#c-icon" x="25" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 2-1 -->
-        <rect x="-150" y="2" width="148" height="148" class="cell"/>
-        <use href="#figma-icon" x="-125" y="25" width="100" height="100"/>
-        
-        <!-- Cell 2-2 -->
-        <rect x="2" y="2" width="148" height="148" class="cell"/>
-        <use href="#firebase-icon" x="25" y="25" width="100" height="100"/>
-      </g>
+    <!-- Title -->
+    <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#8844ee">My Tech Stack</text>
+    
+    <!-- Draw the flattened cube layout -->
+    <!-- Front Face -->
+    <g transform="translate(330, 180)">
+      <rect x="0" y="0" width="240" height="240" class="face" fill="#2a2a40"/>
+      <text x="120" y="30" class="face-label">Front</text>
       
-      <!-- Right face -->
-      <g transform="rotateY(90deg) translate(0,0,150)">
-        <!-- Face background -->
-        <rect x="-150" y="-150" width="300" height="300" class="face"/>
-        
-        <!-- Cell 1-1 -->
-        <rect x="-150" y="-150" width="148" height="148" class="cell"/>
-        <use href="#flutter-icon" x="-125" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 1-2 -->
-        <rect x="2" y="-150" width="148" height="148" class="cell"/>
-        <use href="#gcloud-icon" x="25" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 2-1 -->
-        <rect x="-150" y="2" width="148" height="148" class="cell"/>
-        <use href="#java-icon" x="-125" y="25" width="100" height="100"/>
-        
-        <!-- Cell 2-2 -->
-        <rect x="2" y="2" width="148" height="148" class="cell"/>
-        <use href="#pandas-icon" x="25" y="25" width="100" height="100"/>
-      </g>
+      <!-- Cell 1-1 (top-left) -->
+      <rect x="10" y="50" width="105" height="105" class="cell"/>
+      <use href="#android-icon" x="37.5" y="77.5" width="50" height="50"/>
       
-      <!-- Back face -->
-      <g transform="rotateY(180deg) translate(0,0,150)">
-        <!-- Face background -->
-        <rect x="-150" y="-150" width="300" height="300" class="face"/>
-        
-        <!-- Cell 1-1 -->
-        <rect x="-150" y="-150" width="148" height="148" class="cell"/>
-        <use href="#python-icon" x="-125" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 1-2 -->
-        <rect x="2" y="-150" width="148" height="148" class="cell"/>
-        <use href="#dart-icon" x="25" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 2-1 -->
-        <rect x="-150" y="2" width="148" height="148" class="cell"/>
-        <use href="#androidstudio-icon" x="-125" y="25" width="100" height="100"/>
-        
-        <!-- Cell 2-2 -->
-        <rect x="2" y="2" width="148" height="148" class="cell"/>
-        <use href="#arduino-icon" x="25" y="25" width="100" height="100"/>
-      </g>
+      <!-- Cell 1-2 (top-right) -->
+      <rect x="125" y="50" width="105" height="105" class="cell"/>
+      <use href="#c-icon" x="152.5" y="77.5" width="50" height="50"/>
       
-      <!-- Left face -->
-      <g transform="rotateY(-90deg) translate(0,0,150)">
-        <!-- Face background -->
-        <rect x="-150" y="-150" width="300" height="300" class="face"/>
-        
-        <!-- Cell 1-1 -->
-        <rect x="-150" y="-150" width="148" height="148" class="cell"/>
-        <use href="#android-icon" x="-125" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 1-2 -->
-        <rect x="2" y="-150" width="148" height="148" class="cell"/>
-        <use href="#firebase-icon" x="25" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 2-1 -->
-        <rect x="-150" y="2" width="148" height="148" class="cell"/>
-        <use href="#java-icon" x="-125" y="25" width="100" height="100"/>
-        
-        <!-- Cell 2-2 -->
-        <rect x="2" y="2" width="148" height="148" class="cell"/>
-        <use href="#dart-icon" x="25" y="25" width="100" height="100"/>
-      </g>
+      <!-- Cell 2-1 (bottom-left) -->
+      <rect x="10" y="165" width="105" height="105" class="cell"/>
+      <use href="#figma-icon" x="37.5" y="192.5" width="50" height="50"/>
       
-      <!-- Top face -->
-      <g transform="rotateX(90deg) translate(0,0,150)">
-        <!-- Face background -->
-        <rect x="-150" y="-150" width="300" height="300" class="face"/>
-        
-        <!-- Cell 1-1 -->
-        <rect x="-150" y="-150" width="148" height="148" class="cell"/>
-        <use href="#figma-icon" x="-125" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 1-2 -->
-        <rect x="2" y="-150" width="148" height="148" class="cell"/>
-        <use href="#gcloud-icon" x="25" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 2-1 -->
-        <rect x="-150" y="2" width="148" height="148" class="cell"/>
-        <use href="#python-icon" x="-125" y="25" width="100" height="100"/>
-        
-        <!-- Cell 2-2 -->
-        <rect x="2" y="2" width="148" height="148" class="cell"/>
-        <use href="#arduino-icon" x="25" y="25" width="100" height="100"/>
-      </g>
+      <!-- Cell 2-2 (bottom-right) -->
+      <rect x="125" y="165" width="105" height="105" class="cell"/>
+      <use href="#firebase-icon" x="152.5" y="192.5" width="50" height="50"/>
+    </g>
+    
+    <!-- Right Face -->
+    <g transform="translate(580, 180)">
+      <rect x="0" y="0" width="240" height="240" class="face" fill="#2a2a40"/>
+      <text x="120" y="30" class="face-label">Right</text>
       
-      <!-- Bottom face -->
-      <g transform="rotateX(-90deg) translate(0,0,150)">
-        <!-- Face background -->
-        <rect x="-150" y="-150" width="300" height="300" class="face"/>
-        
-        <!-- Cell 1-1 -->
-        <rect x="-150" y="-150" width="148" height="148" class="cell"/>
-        <use href="#c-icon" x="-125" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 1-2 -->
-        <rect x="2" y="-150" width="148" height="148" class="cell"/>
-        <use href="#flutter-icon" x="25" y="-125" width="100" height="100"/>
-        
-        <!-- Cell 2-1 -->
-        <rect x="-150" y="2" width="148" height="148" class="cell"/>
-        <use href="#pandas-icon" x="-125" y="25" width="100" height="100"/>
-        
-        <!-- Cell 2-2 -->
-        <rect x="2" y="2" width="148" height="148" class="cell"/>
-        <use href="#androidstudio-icon" x="25" y="25" width="100" height="100"/>
-      </g>
+      <!-- Cell 1-1 (top-left) -->
+      <rect x="10" y="50" width="105" height="105" class="cell"/>
+      <use href="#flutter-icon" x="37.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 1-2 (top-right) -->
+      <rect x="125" y="50" width="105" height="105" class="cell"/>
+      <use href="#gcloud-icon" x="152.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 2-1 (bottom-left) -->
+      <rect x="10" y="165" width="105" height="105" class="cell"/>
+      <use href="#java-icon" x="37.5" y="192.5" width="50" height="50"/>
+      
+      <!-- Cell 2-2 (bottom-right) -->
+      <rect x="125" y="165" width="105" height="105" class="cell"/>
+      <use href="#pandas-icon" x="152.5" y="192.5" width="50" height="50"/>
+    </g>
+    
+    <!-- Back Face -->
+    <g transform="translate(580, 430)">
+      <rect x="0" y="0" width="240" height="240" class="face" fill="#2a2a40"/>
+      <text x="120" y="30" class="face-label">Back</text>
+      
+      <!-- Cell 1-1 (top-left) -->
+      <rect x="10" y="50" width="105" height="105" class="cell"/>
+      <use href="#python-icon" x="37.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 1-2 (top-right) -->
+      <rect x="125" y="50" width="105" height="105" class="cell"/>
+      <use href="#dart-icon" x="152.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 2-1 (bottom-left) -->
+      <rect x="10" y="165" width="105" height="105" class="cell"/>
+      <use href="#androidstudio-icon" x="37.5" y="192.5" width="50" height="50"/>
+      
+      <!-- Cell 2-2 (bottom-right) -->
+      <rect x="125" y="165" width="105" height="105" class="cell"/>
+      <use href="#arduino-icon" x="152.5" y="192.5" width="50" height="50"/>
+    </g>
+    
+    <!-- Left Face -->
+    <g transform="translate(80, 180)">
+      <rect x="0" y="0" width="240" height="240" class="face" fill="#2a2a40"/>
+      <text x="120" y="30" class="face-label">Left</text>
+      
+      <!-- Cell 1-1 (top-left) -->
+      <rect x="10" y="50" width="105" height="105" class="cell"/>
+      <use href="#android-icon" x="37.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 1-2 (top-right) -->
+      <rect x="125" y="50" width="105" height="105" class="cell"/>
+      <use href="#firebase-icon" x="152.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 2-1 (bottom-left) -->
+      <rect x="10" y="165" width="105" height="105" class="cell"/>
+      <use href="#java-icon" x="37.5" y="192.5" width="50" height="50"/>
+      
+      <!-- Cell 2-2 (bottom-right) -->
+      <rect x="125" y="165" width="105" height="105" class="cell"/>
+      <use href="#dart-icon" x="152.5" y="192.5" width="50" height="50"/>
+    </g>
+    
+    <!-- Top Face -->
+    <g transform="translate(330, 430)">
+      <rect x="0" y="0" width="240" height="240" class="face" fill="#2a2a40"/>
+      <text x="120" y="30" class="face-label">Top</text>
+      
+      <!-- Cell 1-1 (top-left) -->
+      <rect x="10" y="50" width="105" height="105" class="cell"/>
+      <use href="#figma-icon" x="37.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 1-2 (top-right) -->
+      <rect x="125" y="50" width="105" height="105" class="cell"/>
+      <use href="#gcloud-icon" x="152.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 2-1 (bottom-left) -->
+      <rect x="10" y="165" width="105" height="105" class="cell"/>
+      <use href="#python-icon" x="37.5" y="192.5" width="50" height="50"/>
+      
+      <!-- Cell 2-2 (bottom-right) -->
+      <rect x="125" y="165" width="105" height="105" class="cell"/>
+      <use href="#arduino-icon" x="152.5" y="192.5" width="50" height="50"/>
+    </g>
+    
+    <!-- Bottom Face -->
+    <g transform="translate(80, 430)">
+      <rect x="0" y="0" width="240" height="240" class="face" fill="#2a2a40"/>
+      <text x="120" y="30" class="face-label">Bottom</text>
+      
+      <!-- Cell 1-1 (top-left) -->
+      <rect x="10" y="50" width="105" height="105" class="cell"/>
+      <use href="#c-icon" x="37.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 1-2 (top-right) -->
+      <rect x="125" y="50" width="105" height="105" class="cell"/>
+      <use href="#flutter-icon" x="152.5" y="77.5" width="50" height="50"/>
+      
+      <!-- Cell 2-1 (bottom-left) -->
+      <rect x="10" y="165" width="105" height="105" class="cell"/>
+      <use href="#pandas-icon" x="37.5" y="192.5" width="50" height="50"/>
+      
+      <!-- Cell 2-2 (bottom-right) -->
+      <rect x="125" y="165" width="105" height="105" class="cell"/>
+      <use href="#androidstudio-icon" x="152.5" y="192.5" width="50" height="50"/>
     </g>
   </svg>`;
   
   fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svg);
-  console.log('Rubik\'s cube tech stack SVG generated successfully!');
+  console.log('Tech stack cube SVG generated successfully!');
 }
 
-generateRubiksCube();
+generateTechStackCube();
