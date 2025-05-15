@@ -1,160 +1,163 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
-  <defs>
-    <!-- Define pattern for each tech icon -->
-    
-    <pattern id="icon-0" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-1" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-2" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-3" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-4" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-5" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-6" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-7" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-8" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-9" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-10" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" width="80" height="80" />
-    </pattern>
-    
-    <pattern id="icon-11" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" width="80" height="80" />
-    </pattern>
-    
-  </defs>
-  
-  <style>
-    @keyframes rotate {
-      0% { transform: rotate3d(1, 1, 0, 30deg); }
-      25% { transform: rotate3d(0, 1, 0, 120deg); }
-      50% { transform: rotate3d(1, 0, 1, 210deg); }
-      75% { transform: rotate3d(0, 1, 1, 300deg); }
-      100% { transform: rotate3d(1, 1, 0, 390deg); }
-    }
-    .cube-container {
-      transform-style: preserve-3d;
-      perspective: 1200px;
-      perspective-origin: center;
-    }
-    .cube {
-      transform-style: preserve-3d;
-      transform-origin: 100px 100px -100px;
-      animation: rotate 20s infinite linear;
-    }
-    .face {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      stroke: #8844ee;
-      stroke-width: 2;
-      stroke-linejoin: round;
-    }
-    .front { transform: translateZ(100px); }
-    .back { transform: rotateY(180deg) translateZ(100px); }
-    .right { transform: rotateY(90deg) translateZ(100px); }
-    .left { transform: rotateY(-90deg) translateZ(100px); }
-    .top { transform: rotateX(90deg) translateZ(100px); }
-    .bottom { transform: rotateX(-90deg) translateZ(100px); }
-    
-    /* Grid cells for each face */
-    .cell {
-      width: 100px;
-      height: 100px;
-      stroke: #8844ee;
-      stroke-width: 1;
-    }
-  </style>
-  
-  <!-- Center the drawing -->
-  <g transform="translate(150, 150)">
-    <!-- The 3D cube with animation -->
-    <g class="cube-container">
-      <g class="cube">
-        <!-- Front face -->
-        <g class="face front">
-          <rect width="200" height="200" fill="#2a2a40" />
-          <rect x="0" y="0" width="100" height="100" fill="url(#icon-0)" class="cell" />
-          <rect x="100" y="0" width="100" height="100" fill="url(#icon-1)" class="cell" />
-          <rect x="0" y="100" width="100" height="100" fill="url(#icon-2)" class="cell" />
-          <rect x="100" y="100" width="100" height="100" fill="url(#icon-3)" class="cell" />
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+    <defs>
+      <!-- Inline the tech icons as data URLs to avoid CORS issues -->
+      <style>
+        @keyframes rotate {
+          0% { transform: rotate3d(1, 1, 0, 0deg); }
+          100% { transform: rotate3d(1, 1, 0, 360deg); }
+        }
         
-        <!-- Back face -->
-        <g class="face back">
-          <rect width="200" height="200" fill="#222234" />
-          <!-- Mirror pattern for back face for visual interest -->
-          <rect x="0" y="0" width="100" height="100" fill="url(#icon-4)" class="cell" />
-          <rect x="100" y="0" width="100" height="100" fill="url(#icon-5)" class="cell" />
-          <rect x="0" y="100" width="100" height="100" fill="url(#icon-6)" class="cell" />
-          <rect x="100" y="100" width="100" height="100" fill="url(#icon-7)" class="cell" />
-        </g>
+        .cube-wrapper {
+          width: 300px;
+          height: 300px;
+          perspective: 1000px;
+          transform-style: preserve-3d;
+        }
         
-        <!-- Right face -->
-        <g class="face right">
-          <rect width="200" height="200" fill="#252538" />
-          <rect x="0" y="0" width="100" height="100" fill="url(#icon-8)" class="cell" />
-          <rect x="100" y="0" width="100" height="100" fill="url(#icon-9)" class="cell" />
-          <rect x="0" y="100" width="100" height="100" fill="url(#icon-10)" class="cell" />
-          <rect x="100" y="100" width="100" height="100" fill="url(#icon-11)" class="cell" />
-        </g>
+        .cube {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-style: preserve-3d;
+          transform: translateZ(-100px);
+          animation: rotate 15s infinite linear;
+        }
         
-        <!-- Left face -->
-        <g class="face left">
-          <rect width="200" height="200" fill="#252538" />
-          <!-- Use some icons for visual consistency -->
-          <rect x="0" y="0" width="100" height="100" fill="url(#icon-0)" class="cell" />
-          <rect x="100" y="0" width="100" height="100" fill="url(#icon-3)" class="cell" />
-          <rect x="0" y="100" width="100" height="100" fill="url(#icon-6)" class="cell" />
-          <rect x="100" y="100" width="100" height="100" fill="url(#icon-9)" class="cell" />
-        </g>
+        .cube__face {
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          border: 2px solid #8844ee;
+          display: grid;
+          grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+          gap: 2px;
+        }
         
-        <!-- Top face -->
-        <g class="face top">
-          <rect width="200" height="200" fill="#1f1f30" />
-          <rect x="0" y="0" width="100" height="100" fill="url(#icon-4)" class="cell" />
-          <rect x="100" y="0" width="100" height="100" fill="url(#icon-5)" class="cell" />
-          <rect x="0" y="100" width="100" height="100" fill="url(#icon-10)" class="cell" />
-          <rect x="100" y="100" width="100" height="100" fill="url(#icon-11)" class="cell" />
-        </g>
+        .cube__face--front  { transform: rotateY(0deg) translateZ(100px); }
+        .cube__face--right  { transform: rotateY(90deg) translateZ(100px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+        .cube__face--top    { transform: rotateX(90deg) translateZ(100px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
         
-        <!-- Bottom face -->
-        <g class="face bottom">
-          <rect width="200" height="200" fill="#1f1f30" />
-          <rect x="0" y="0" width="100" height="100" fill="url(#icon-2)" class="cell" />
-          <rect x="100" y="0" width="100" height="100" fill="url(#icon-7)" class="cell" />
-          <rect x="0" y="100" width="100" height="100" fill="url(#icon-8)" class="cell" />
-          <rect x="100" y="100" width="100" height="100" fill="url(#icon-1)" class="cell" />
-        </g>
-      </g>
-    </g>
-  </g>
-</svg>
+        .icon-cell {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(42, 42, 64, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .icon {
+          width: 70%;
+          height: 70%;
+        }
+      </style>
+    </defs>
+    
+    <!-- Group for the 3D cube -->
+    <foreignObject x="50" y="50" width="400" height="400">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
+        <div class="cube-wrapper">
+          <div class="cube">
+            <!-- Front face -->
+            <div class="cube__face cube__face--front">
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" />
+              </div>
+            </div>
+            
+            <!-- Right face -->
+            <div class="cube__face cube__face--right">
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" />
+              </div>
+            </div>
+            
+            <!-- Back face -->
+            <div class="cube__face cube__face--back">
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" />
+              </div>
+            </div>
+            
+            <!-- Left face -->
+            <div class="cube__face cube__face--left">
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" />
+              </div>
+            </div>
+            
+            <!-- Top face -->
+            <div class="cube__face cube__face--top">
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" />
+              </div>
+            </div>
+            
+            <!-- Bottom face -->
+            <div class="cube__face cube__face--bottom">
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" />
+              </div>
+              <div class="icon-cell">
+                <img class="icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+  </svg>
