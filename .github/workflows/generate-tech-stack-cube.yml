@@ -2,7 +2,7 @@ name: Generate Tech Stack Cube
 on:
   # Run weekly on Sunday
   schedule:
-    - cron: '0 0 * *0'
+    - cron: '0 0 * *0' 
   # Run on push to main branch
   push:
     branches: [ main ]
