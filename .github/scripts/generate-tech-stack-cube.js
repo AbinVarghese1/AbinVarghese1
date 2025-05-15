@@ -19,7 +19,7 @@ const techIcons = [
 
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
-  // Create SVG with proper CSS 3D transforms - significantly increased viewing area
+  // Create SVG with proper CSS 3D transforms - repositioned to reduce wasted space
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900">
     <defs>
       <style>
@@ -30,15 +30,17 @@ function generateRubiksCube() {
         
         .cube-container {
           display: flex;
-          justify-content: center;
-          align-items: center;
+          justify-content: flex-start;
+          align-items: flex-start;
           width: 100%;
           height: 100%;
+          padding-top: 50px;
+          padding-left: 50px;
         }
         
         .cube-wrapper {
-          width: 800px;
-          height: 800px;
+          width: 700px;
+          height: 700px;
           perspective: 2000px;
           transform-style: preserve-3d;
         }
@@ -60,8 +62,8 @@ function generateRubiksCube() {
           display: grid;
           grid-template: repeat(2, 1fr) / repeat(2, 1fr);
           gap: 3px;
-          left: 250px;
-          top: 250px;
+          left: 200px;
+          top: 200px;
         }
         
         .cube__face--front  { transform: rotateY(0deg) translateZ(150px); }
@@ -87,8 +89,8 @@ function generateRubiksCube() {
       </style>
     </defs>
     
-    <!-- Group for the 3D cube - much larger viewing area with proper centering -->
-    <foreignObject x="0" y="0" width="1200" height="1200">
+    <!-- Group for the 3D cube - positioned more to the top-left to reduce wasted space -->
+    <foreignObject x="0" y="0" width="900" height="900">
       <div xmlns="http://www.w3.org/1999/xhtml" class="cube-container">
         <div class="cube-wrapper">
           <div class="cube">
