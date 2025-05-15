@@ -20,7 +20,7 @@ const techIcons = [
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
   // Create SVG with proper CSS 3D transforms - significantly increased viewing area
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900">
     <defs>
       <style>
         @keyframes rotate {
