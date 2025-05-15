@@ -1,4 +1,4 @@
-name: Generate Tech Stack Cube  
+name: Generate Tech Stack Cube   
 on:
   schedule:
     - cron: '0 0 * * 0'
