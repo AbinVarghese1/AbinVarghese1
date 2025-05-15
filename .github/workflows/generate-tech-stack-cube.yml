@@ -22,15 +22,16 @@ jobs:
       with:
         node-version: '16'
     
-    - name: Create script directory
-      run: mkdir -p .github/scripts
-    
-    - name: Copy updated script to workspace
-      run: |
-        cp paste.txt .github/scripts/generate-tech-stack-cube.js
-    
     - name: Generate Tech Stack Cube SVG
       run: node .github/scripts/generate-tech-stack-cube.js
+    
+    - name: Commit and Push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add tech-stack-cube.svg
+        git commit -m "Update tech stack cube SVG with embedded icons" || echo "No changes to commit"
+        git push
     
     - name: Commit and Push changes
       run: |
