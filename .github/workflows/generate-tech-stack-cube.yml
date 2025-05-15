@@ -1,13 +1,11 @@
 name: Generate Tech Stack Cube  
 on:
-  # Run weekly on Sunday
   schedule:
     - cron: '0 0 * * 0'
-  # Run on push to main branch
   push:
     branches: [ main ]
-  # Allow manual trigger
   workflow_dispatch:
+
 jobs:
   generate-tech-stack-svg:
     runs-on: ubuntu-latest
@@ -29,5 +27,5 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add tech-stack-cube.svg
-        git commit -m "Update tech stack cube SVG with embedded icons" || echo "No changes to commit"
+        git commit -m "Update tech stack cube SVG" || echo "No changes to commit"
         git push
