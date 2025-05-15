@@ -297,3 +297,4 @@ function generateRubiksCube() {
 
 // Run the generator
 generateRubiksCube();
+
