@@ -19,8 +19,8 @@ const techIcons = [
 
 // Generate a pure SVG Rubik's cube with tech icons
 function generateRubiksCube() {
-  // Create SVG with proper CSS 3D transforms - increased viewing window size
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  // Create SVG with proper CSS 3D transforms - increased viewing window size and better centering
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
     <defs>
       <style>
         @keyframes rotate {
@@ -29,9 +29,9 @@ function generateRubiksCube() {
         }
         
         .cube-wrapper {
-          width: 500px;
-          height: 500px;
-          perspective: 1000px;
+          width: 700px;
+          height: 700px;
+          perspective: 1500px;
           transform-style: preserve-3d;
         }
         
@@ -40,26 +40,26 @@ function generateRubiksCube() {
           height: 100%;
           position: relative;
           transform-style: preserve-3d;
-          transform: translateZ(-100px);
+          transform: translateZ(-150px);
           animation: rotate 15s infinite linear;
         }
         
         .cube__face {
           position: absolute;
-          width: 200px;
-          height: 200px;
-          border: 2px solid #8844ee;
+          width: 300px;
+          height: 300px;
+          border: 3px solid #8844ee;
           display: grid;
           grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-          gap: 2px;
+          gap: 3px;
         }
         
-        .cube__face--front  { transform: rotateY(0deg) translateZ(100px); }
-        .cube__face--right  { transform: rotateY(90deg) translateZ(100px); }
-        .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
-        .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
-        .cube__face--top    { transform: rotateX(90deg) translateZ(100px); }
-        .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+        .cube__face--front  { transform: rotateY(0deg) translateZ(150px); }
+        .cube__face--right  { transform: rotateY(90deg) translateZ(150px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(150px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(150px); }
+        .cube__face--top    { transform: rotateX(90deg) translateZ(150px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(150px); }
         
         .icon-cell {
           width: 100%;
@@ -77,8 +77,8 @@ function generateRubiksCube() {
       </style>
     </defs>
     
-    <!-- Group for the 3D cube - increased viewing window size while maintaining center position -->
-    <foreignObject x="50" y="50" width="500" height="500">
+    <!-- Group for the 3D cube - significantly increased viewing window and better centering -->
+    <foreignObject x="50" y="50" width="700" height="700">
       <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
         <div class="cube-wrapper">
           <div class="cube">
