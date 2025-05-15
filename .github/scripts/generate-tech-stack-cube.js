@@ -1,61 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-// Tech stack using simplified icons that will work in GitHub README
+// Generate a tech stack cube that works on GitHub README using pure SVG (no foreignObject)
 function generateRubiksCube() {
-  // Create SVG with embedded icon paths instead of external images
+  // Create SVG with embedded icon paths - GitHub-compatible version
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
     <defs>
+      <!-- Define tech icon colors -->
       <style>
-        @keyframes rotate {
-          0% { transform: rotate3d(1, 1, 0, 0deg); }
-          100% { transform: rotate3d(1, 1, 0, 360deg); }
-        }
-        
-        .cube-wrapper {
-          width: 400px;
-          height: 400px;
-          perspective: 1200px;
-          transform-style: preserve-3d;
-        }
-        
-        .cube {
-          width: 100%;
-          height: 100%;
-          position: relative;
-          transform-style: preserve-3d;
-          transform: translateZ(-150px);
-          animation: rotate 15s infinite linear;
-        }
-        
-        .cube__face {
-          position: absolute;
-          width: 300px;
-          height: 300px;
-          border: 2px solid #8844ee;
-          display: grid;
-          grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-          gap: 2px;
-        }
-        
-        .cube__face--front  { transform: rotateY(0deg) translateZ(150px); }
-        .cube__face--right  { transform: rotateY(90deg) translateZ(150px); }
-        .cube__face--back   { transform: rotateY(180deg) translateZ(150px); }
-        .cube__face--left   { transform: rotateY(-90deg) translateZ(150px); }
-        .cube__face--top    { transform: rotateX(90deg) translateZ(150px); }
-        .cube__face--bottom { transform: rotateX(-90deg) translateZ(150px); }
-        
-        .icon-cell {
-          width: 100%;
-          height: 100%;
-          background-color: rgba(42, 42, 64, 0.9);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-        }
-        
-        /* Define tech icon colors */
         .android { fill: #3DDC84; }
         .c { fill: #A8B9CC; }
         .figma { fill: #F24E1E; }
@@ -68,6 +20,7 @@ function generateRubiksCube() {
         .dart { fill: #0175C2; }
         .androidstudio { fill: #3DDC84; }
         .arduino { fill: #00979D; }
+        .face { fill: rgba(42, 42, 64, 0.9); stroke: #8844ee; stroke-width: 2; }
       </style>
 
       <!-- Android Icon -->
@@ -136,165 +89,83 @@ function generateRubiksCube() {
       </symbol>
     </defs>
     
-    <!-- Group for the 3D cube -->
-    <foreignObject x="200" y="200" width="400" height="400">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%">
-        <div class="cube-wrapper">
-          <div class="cube">
-            <!-- Front face -->
-            <div class="cube__face cube__face--front">
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#android"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#c"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#figma"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#firebase"></use>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Right face -->
-            <div class="cube__face cube__face--right">
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#flutter"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#gcloud"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#java"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#pandas"></use>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Back face -->
-            <div class="cube__face cube__face--back">
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#python"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#dart"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#androidstudio"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#arduino"></use>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Left face -->
-            <div class="cube__face cube__face--left">
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#android"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#firebase"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#java"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#dart"></use>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Top face -->
-            <div class="cube__face cube__face--top">
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#figma"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#gcloud"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#python"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#arduino"></use>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Bottom face -->
-            <div class="cube__face cube__face--bottom">
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#c"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#flutter"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#pandas"></use>
-                </svg>
-              </div>
-              <div class="icon-cell">
-                <svg width="70%" height="70%" viewBox="0 0 24 24">
-                  <use href="#androidstudio"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </foreignObject>
+    <!-- Static cube representation -->
+    <g transform="translate(400,400) scale(0.85)">
+      <!-- Front face -->
+      <g transform="translate(-150,-150)">
+        <rect class="face" x="0" y="0" width="300" height="300" />
+        
+        <!-- Front face icons -->
+        <svg x="5" y="5" width="140" height="140">
+          <use href="#android" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="155" y="5" width="140" height="140">
+          <use href="#c" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="5" y="155" width="140" height="140">
+          <use href="#figma" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="155" y="155" width="140" height="140">
+          <use href="#firebase" width="80" height="80" x="30" y="30"/>
+        </svg>
+      </g>
+      
+      <!-- Right face -->
+      <g transform="translate(50,-150) rotate(30) skewY(-30)">
+        <rect class="face" x="0" y="0" width="300" height="300" />
+        
+        <!-- Right face icons -->
+        <svg x="5" y="5" width="140" height="140">
+          <use href="#flutter" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="155" y="5" width="140" height="140">
+          <use href="#gcloud" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="5" y="155" width="140" height="140">
+          <use href="#java" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="155" y="155" width="140" height="140">
+          <use href="#pandas" width="80" height="80" x="30" y="30"/>
+        </svg>
+      </g>
+      
+      <!-- Top face -->
+      <g transform="translate(-150,-350) rotate(30) skewX(-30)">
+        <rect class="face" x="0" y="0" width="300" height="300" />
+        
+        <!-- Top face icons -->
+        <svg x="5" y="5" width="140" height="140">
+          <use href="#python" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="155" y="5" width="140" height="140">
+          <use href="#dart" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="5" y="155" width="140" height="140">
+          <use href="#androidstudio" width="80" height="80" x="30" y="30"/>
+        </svg>
+        
+        <svg x="155" y="155" width="140" height="140">
+          <use href="#arduino" width="80" height="80" x="30" y="30"/>
+        </svg>
+      </g>
+    </g>
+    
+    <!-- Title -->
+    <text x="400" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#8844ee">My Tech Stack</text>
   </svg>`;
   
   // Write the SVG file
   fs.writeFileSync(path.join(process.cwd(), 'tech-stack-cube.svg'), svg);
-  console.log('Rubik\'s cube tech stack SVG generated successfully!');
+  console.log('Tech stack cube SVG generated successfully!');
 }
 
 // Run the generator
 generateRubiksCube();
-
