@@ -97,7 +97,7 @@ async function generateRubiksCubeWithEmbeddedIcons() {
     console.log('All icons downloaded and converted to data URLs');
     
     // Create SVG with embedded icons - PROPERLY CENTERED
-    let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
       <defs>
         <style>
           @keyframes rotate {
@@ -114,8 +114,8 @@ async function generateRubiksCubeWithEmbeddedIcons() {
           }
           
           .cube-wrapper {
-            width: 800px;
-            height: 800px;
+            width: 600px;
+            height: 600px;
             perspective: 2200px;
             transform-style: preserve-3d;
             display: flex;
@@ -168,7 +168,7 @@ async function generateRubiksCubeWithEmbeddedIcons() {
       </defs>
       
       <!-- Group for the 3D cube - properly centered -->
-      <foreignObject x="0" y="0" width="800" height="800">
+      <foreignObject x="0" y="0" width="600" height="600">
         <div xmlns="http://www.w3.org/1999/xhtml" class="cube-container">
           <div class="cube-wrapper">
             <div class="cube">
