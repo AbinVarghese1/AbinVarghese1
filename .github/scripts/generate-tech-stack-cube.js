@@ -96,7 +96,7 @@ async function generateRubiksCubeWithEmbeddedIcons() {
     
     console.log('All icons downloaded and converted to data URLs');
     
-    // Create SVG with embedded icons
+    // Create SVG with embedded icons - INCREASED CUBE SIZE AND ADJUSTED POSITIONING
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
       <defs>
         <style>
@@ -107,18 +107,16 @@ async function generateRubiksCubeWithEmbeddedIcons() {
           
           .cube-container {
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             height: 100%;
-            padding-top: 50px;
-            padding-left: 50px;
           }
           
           .cube-wrapper {
-            width: 700px;
-            height: 700px;
-            perspective: 2000px;
+            width: 800px;
+            height: 800px;
+            perspective: 2200px;
             transform-style: preserve-3d;
           }
           
@@ -127,28 +125,28 @@ async function generateRubiksCubeWithEmbeddedIcons() {
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transform: translateZ(-150px);
+            transform: translateZ(-180px);
             animation: rotate 15s infinite linear;
           }
           
           .cube__face {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 360px;
+            height: 360px;
             border: 3px solid #8844ee;
             display: grid;
             grid-template: repeat(2, 1fr) / repeat(2, 1fr);
             gap: 3px;
-            left: 200px;
-            top: 200px;
+            left: 220px;
+            top: 220px;
           }
           
-          .cube__face--front  { transform: rotateY(0deg) translateZ(150px); }
-          .cube__face--right  { transform: rotateY(90deg) translateZ(150px); }
-          .cube__face--back   { transform: rotateY(180deg) translateZ(150px); }
-          .cube__face--left   { transform: rotateY(-90deg) translateZ(150px); }
-          .cube__face--top    { transform: rotateX(90deg) translateZ(150px); }
-          .cube__face--bottom { transform: rotateX(-90deg) translateZ(150px); }
+          .cube__face--front  { transform: rotateY(0deg) translateZ(180px); }
+          .cube__face--right  { transform: rotateY(90deg) translateZ(180px); }
+          .cube__face--back   { transform: rotateY(180deg) translateZ(180px); }
+          .cube__face--left   { transform: rotateY(-90deg) translateZ(180px); }
+          .cube__face--top    { transform: rotateX(90deg) translateZ(180px); }
+          .cube__face--bottom { transform: rotateX(-90deg) translateZ(180px); }
           
           .icon-cell {
             width: 100%;
@@ -166,7 +164,7 @@ async function generateRubiksCubeWithEmbeddedIcons() {
         </style>
       </defs>
       
-      <!-- Group for the 3D cube - positioned more to the top-left to reduce wasted space -->
+      <!-- Group for the 3D cube - centered in the available space -->
       <foreignObject x="0" y="0" width="900" height="900">
         <div xmlns="http://www.w3.org/1999/xhtml" class="cube-container">
           <div class="cube-wrapper">
