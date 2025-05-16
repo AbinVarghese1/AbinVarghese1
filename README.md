@@ -16,7 +16,7 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
 </div>
 <h2 align="left">Tech Stack</h2>
 <div align="center">
-  <img src="./tech-stack-cube.svg" width="450" height="450" alt="Tech Stack Cube" />
+  <img src="./tech-stack-cube.svg" width="400" height="400" alt="Tech Stack Cube" />
 </div>
 <h2 align="left">GitHub Stats</h2>
 <div align="center">
