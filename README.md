@@ -35,7 +35,7 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
   <h3>1. <a href="https://github.com/AbinVarghese1/Foodie-Buddy">FoodieBuddy</a></h3>
   <p>An AI-powered recipe app built with Flutter and Firebase that lets users discover, generate, and save recipes based on ingredients, preferences, and meal planning needs.</p>
   
-  <h3>2. <a href="https://github.com/liyatony/ExcuseMeNow">ExcuseMe</a></h3>
+  <h3>2. <a href="https://github.com/liyatony/ExcuseMeNow">ExcuseMeNow</a></h3>
   <p>A random excuse generator that uses AI and Firebase to provide humorous or practical excuses for avoiding tasks, meetings, or awkward situations.</p>
   
   <h3>3. <a href="https://github.com/HAVA-Weather">Hava</a></h3>
