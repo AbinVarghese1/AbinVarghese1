@@ -3,16 +3,21 @@
 I focus on <strong>web development</strong>, <strong>AI</strong>, and <strong>IoT</strong>, and have worked on several application based projects from smart assistants and accessibility tools to intelligent weather solutions always aiming to build something useful and impactful.<br><br>
 When I'm not coding, you'll probably find me tuned into a football match or analyzing plays like a coach , all while sketching out ideas for my next tech project.🏆<br><br>
 </p>
-<div align="left">
-  <a href="https://linkedin.com/in/abin-varghese-315012280" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
-  </a>
-  <a href="https://instagram.com/abinvarghese.__" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo" />
-  </a>
-  <a href="mailto:abinv182@gmail.com" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="52" height="40" alt="gmail logo" />
-  </a>
+<div align="left" style="display: flex; align-items: center; justify-content: space-between;">
+  <div>
+    <a href="https://linkedin.com/in/abin-varghese-315012280" target="_blank">
+      <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
+    </a>
+    <a href="https://instagram.com/abinvarghese.__" target="_blank">
+      <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo" />
+    </a>
+    <a href="mailto:abinv182@gmail.com" target="_blank">
+      <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="52" height="40" alt="gmail logo" />
+    </a>
+  </div>
+  <div align="right">
+    <img src="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/main/stadium.svg" width="200" height="80" alt="Football Stadium" />
+  </div>
 </div>
 <h2 align="left">Tech Stack</h2>
 <div align="center">
@@ -27,10 +32,7 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
   <br>
   <img src="https://github-profile-trophy.vercel.app?username=AbinVarghese1&theme=radical&column=4&row=2&margin-w=8&margin-h=8&no-bg=false&no-frame=true&order=4" height="200" alt="trophy graph" />
 </div>
-
-
 <h2 align="left">Interesting Projects</h2>
-
 <div align="left">
   <h3>1. <a href="https://github.com/AbinVarghese1/Foodie-Buddy">FoodieBuddy</a></h3>
   <p>An AI-powered recipe app built with Flutter and Firebase that lets users discover, generate, and save recipes based on ingredients, preferences, and meal planning needs.</p>
@@ -41,7 +43,6 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
   <h3>3. <a href="https://github.com/HAVA-Weather">Hava</a></h3>
   <p>A smart weather station app offering real-time sensor data, AI-driven forecasts, and farming recommendations, built with Flutter, Supabase, and a Random Forest model.</p>
 </div>
-
 <br>
 <br>
 <picture>
