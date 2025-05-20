@@ -28,7 +28,6 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
   <img src="https://github-profile-trophy.vercel.app?username=AbinVarghese1&theme=radical&column=4&row=2&margin-w=8&margin-h=8&no-bg=false&no-frame=true&order=4" height="200" alt="trophy graph" />
 </div>
 
-
 <h2 align="left">Interesting Projects</h2>
 
 <div align="left">
