@@ -2,15 +2,16 @@ name: Update Visitor Counter
 
 on:
   schedule:
-    # Run every hour
-    - cron: '0 * * * *'
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
   update-counter:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
       
       - name: Set up Python
         uses: actions/setup-python@v4
