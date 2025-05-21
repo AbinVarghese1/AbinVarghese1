@@ -3,6 +3,7 @@
 I focus on <strong>web development</strong>, <strong>AI</strong>, and <strong>IoT</strong>, and have worked on several application based projects from smart assistants and accessibility tools to intelligent weather solutions always aiming to build something useful and impactful.<br><br>
 When I'm not coding, you'll probably find me tuned into a football match or analyzing plays like a coach , all while sketching out ideas for my next tech project.🏆<br><br>
 </p>
+
 <div align="left">
   <a href="https://linkedin.com/in/abin-varghese-315012280" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
@@ -13,7 +14,9 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
   <a href="mailto:abinv182@gmail.com" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="52" height="40" alt="gmail logo" />
   </a>
+  <img src="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/main/visitor-counter.svg" height="40" alt="visitor counter" />
 </div>
+
 <h2 align="left">Tech Stack</h2>
 <div align="center">
   <img src="./tech-stack-cube.svg" width="400" height="400" alt="Tech Stack Cube" />
