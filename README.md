@@ -4,24 +4,18 @@ I focus on <strong>web development</strong>, <strong>AI</strong>, and <strong>Io
 When I'm not coding, you'll probably find me tuned into a football match or analyzing plays like a coach , all while sketching out ideas for my next tech project.🏆<br><br>
 </p>
 
-<table width="100%">
-  <tr>
-    <td align="left" width="70%">
-      <a href="https://linkedin.com/in/abin-varghese-315012280" target="_blank">
-        <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
-      </a>
-      <a href="https://instagram.com/abinvarghese.__" target="_blank">
-        <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo" />
-      </a>
-      <a href="mailto:abinv182@gmail.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="52" height="40" alt="gmail logo" />
-      </a>
-    </td>
-    <td align="right" width="30%">
-      <img src="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/main/visitor-counter.svg" height="70" alt="visitor counter" />
-    </td>
-  </tr>
-</table>
+<p align="left">
+  <a href="https://linkedin.com/in/abin-varghese-315012280" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
+  </a>
+  <a href="https://instagram.com/abinvarghese.__" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo" />
+  </a>
+  <a href="mailto:abinv182@gmail.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="52" height="40" alt="gmail logo" />
+  </a>
+  <img align="right" src="https://raw.githubusercontent.com/AbinVarghese1/AbinVarghese1/main/visitor-counter.svg" height="70" alt="visitor counter" />
+</p>
 
 <h2 align="left">Tech Stack</h2>
 <div align="center">
