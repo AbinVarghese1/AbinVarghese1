@@ -1,88 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
   <!-- Main container -->
-  <rect x="0" y="0" width="280" height="60" rx="10" fill="
-#1d2233" />
-
+  <rect x="0" y="0" width="280" height="60" rx="10" fill="#1d2233" />
   <!-- Scoreboard design -->
-  <rect x="10" y="5" width="260" height="50" rx="5" fill="
-#242938" stroke="
-#41B883" stroke-width="1" />
-
+  <rect x="10" y="5" width="260" height="50" rx="5" fill="#242938" stroke="#41B883" stroke-width="1" />
   <!-- Field pattern in background -->
-  <rect x="10" y="5" width="260" height="50" fill="
-#1e482e" opacity="0.2" />
-  <rect x="10" y="30" width="260" height="1" fill="
-#ffffff" opacity="0.3" />
-  <circle cx="140" cy="30" r="30" stroke="
-#ffffff" stroke-width="1" fill="none" opacity="0.1" />
-
+  <rect x="10" y="5" width="260" height="50" fill="#1e482e" opacity="0.2" />
+  <rect x="10" y="30" width="260" height="1" fill="#ffffff" opacity="0.3" />
+  <circle cx="140" cy="30" r="30" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.1" />
   <!-- Label section -->
-  <rect x="20" y="15" width="100" height="30" rx="5" fill="
-#242938" />
-  <text x="70" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="
-#ffffff" text-anchor="middle">VISITORS</text>
-
+  <rect x="20" y="15" width="100" height="30" rx="5" fill="#242938" />
+  <text x="70" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#ffffff" text-anchor="middle">VISITORS</text>
   <!-- Counter section with scoreboard style -->
-  <rect x="140" y="15" width="120" height="30" rx="5" fill="
-#242938" stroke="
-#41B883" stroke-width="1" />
-
+  <rect x="140" y="15" width="120" height="30" rx="5" fill="#242938" stroke="#41B883" stroke-width="1" />
   <!-- Digits -->
   <g id="counter">
     <!-- Logic to show/hide fifth digit when count exceeds 9999 -->
     <g id="fifthDigit" transform="translate(150, 30)" opacity="0">
-      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="
-#000000" opacity="0.6" />
-      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="
-#41B883" text-anchor="middle">0</text>
-      <animate id="showFifthDigit" attributeName="opacity" from="0" to="1" dur="0.5s" begin="countExceeds9999.begin" fill="freeze" />
+      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="#000000" opacity="0.6" />
+      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">0</text>
     </g>
-
-    <!-- Regular digits (shift position when 5th digit appears) -->
+    <!-- Regular digits -->
     <!-- First digit -->
     <g transform="translate(170, 30)">
-      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="
-#000000" opacity="0.6" />
-      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="
-#41B883" text-anchor="middle">0</text>
-      <animate id="moveFirstDigit" attributeName="transform" from="translate(170, 30)" to="translate(170, 30)" dur="0.5s" begin="countExceeds9999.begin" fill="freeze" />
+      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="#000000" opacity="0.6" />
+      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">0</text>
     </g>
-
     <!-- Second digit -->
     <g transform="translate(190, 30)">
-      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="
-#000000" opacity="0.6" />
-      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="
-#41B883" text-anchor="middle">0</text>
-      <animate id="moveSecondDigit" attributeName="transform" from="translate(190, 30)" to="translate(190, 30)" dur="0.5s" begin="countExceeds9999.begin" fill="freeze" />
+      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="#000000" opacity="0.6" />
+      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">0</text>
     </g>
-
     <!-- Third digit -->
     <g transform="translate(210, 30)">
-      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="
-#000000" opacity="0.6" />
-      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="
-#41B883" text-anchor="middle">0</text>
-      <animate id="moveThirdDigit" attributeName="transform" from="translate(210, 30)" to="translate(210, 30)" dur="0.5s" begin="countExceeds9999.begin" fill="freeze" />
+      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="#000000" opacity="0.6" />
+      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">0</text>
     </g>
-
     <!-- Fourth digit -->
     <g transform="translate(230, 30)">
-      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="
-#000000" opacity="0.6" />
-      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="
-#41B883" text-anchor="middle">1</text>
-      <animate id="moveFourthDigit" attributeName="transform" from="translate(230, 30)" to="translate(230, 30)" dur="0.5s" begin="countExceeds9999.begin" fill="freeze" />
+      <rect x="-10" y="-12" width="20" height="24" rx="2" fill="#000000" opacity="0.6" />
+      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">1</text>
     </g>
   </g>
-
   <!-- Flashing indicator light -->
-  <circle cx="250" cy="30" r="3" fill="
-#41B883">
+  <circle cx="250" cy="30" r="3" fill="#41B883">
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
   </circle>
-
-  <!-- Animation trigger (would be activated by your GitHub visitor count script) -->
-  <animate id="countExceeds9999" attributeName="visibility" from="hidden" to="hidden" dur="0.001s" begin="indefinite" />
 </svg>
