@@ -34,6 +34,7 @@ When I'm not coding, you'll probably find me tuned into a football match or anal
 <h2 align="left">Interesting Projects</h2>
 
 
+
 <div align="left">
   <h3>1. <a href="https://github.com/AbinVarghese1/Foodie-Buddy">FoodieBuddy</a></h3>
   <p>An AI-powered recipe app built with Flutter and Firebase that lets users discover, generate, and save recipes based on ingredients, preferences, and meal planning needs.</p>
