@@ -39,7 +39,7 @@
     <!-- Fourth digit -->
     <g transform="translate(230, 30)">
       <rect x="-10" y="-12" width="20" height="24" rx="2" fill="#000000" opacity="0.6" />
-      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">0</text>
+      <text x="0" y="6" font-family="'Courier New', monospace" font-size="20" fill="#41B883" text-anchor="middle">1</text>
     </g>
   </g>
   <!-- Flashing indicator light -->
@@ -413,4 +413,5 @@
   <!-- Last updated: 2025-06-07 08:30:06 -->
   <!-- Last updated: 2025-06-07 09:24:19 -->
   <!-- Last updated: 2025-06-07 10:26:12 -->
+  <!-- Last updated: 2025-06-07 11:19:11 -->
 </svg>
